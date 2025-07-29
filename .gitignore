@@ -1,0 +1,28 @@
+# === Global ===
+.DS_Store
+Thumbs.db
+*.iml
+*.log
+*.pyc
+__pycache__/
+
+# === Python / Django ===
+buymate-backend/venv/
+buymate-backend/**/__pycache__/
+buymate-backend/**/migrations/*.pyc
+buymate-backend/**/migrations/__pycache__/
+*.sqlite3
+
+# === Node / React (Vite) ===
+buymate-frontend/buymate-ai/node_modules/
+buymate-frontend/buymate-ai/dist/
+buymate-frontend/buymate-ai/.vite/
+
+# === VSCode and IDEs ===
+.vscode/
+.idea/
+
+# === Environment Files ===
+.env
+.env.local
+.env.*.local
