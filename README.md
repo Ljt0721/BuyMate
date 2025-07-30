@@ -34,8 +34,14 @@ AI相关的内容放入 buymate-backend/backend/experiment/ai_utils.py 中供其
 
 ### Frontend Setup
 
+首先安装 nvm，参考[链接](https://blog.csdn.net/weixin_57844432/article/details/127788884)
+
 ```bash
-# TODO: add frontend setup
+cd buymate-frontend/buymate-ai
+nvm install 18.18.0
+nvm use
+npm install
+npm run dev
 ```
 
 ### Frontend dev
