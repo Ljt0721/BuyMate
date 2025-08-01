@@ -15,6 +15,7 @@ pip install -r requirements.txt
 
 python manage.py makemigrations
 python manage.py migrate
+python manage.py import_products
 python manage.py runserver
 ```
 
@@ -69,36 +70,36 @@ npm run dev
 
 ## AI展示流程
 
-tag 模型，转译模型
+tag 模型，转译模型  
 
-1. -> tag 模型：if模型识别到了关键词/话术类型 tag模型给出识别到的关键词以及话术类型 else pass
-2. -> tag 模型识别到了，相同的话术内容 -> 转译模型 给出一个劝导不要消费的内容
-3. 回给前端 两部分，关键词和话术类型 + 劝导内容
+1. -> tag 模型：if模型识别到了关键词/话术类型 tag模型给出识别到的关键词以及话术类型 else pass  
+2. -> tag 模型识别到了，相同的话术内容 -> 转译模型 给出一个劝导不要消费的内容  
+3. 回给前端 两部分，关键词和话术类型 + 劝导内容  
 
-tag 模型 system prompt 要有五大类话术的类型+描述+示例词汇， 指导 给出最明显的两个类别/关键词
-转译模型 主播说的话+你识别出的类别，要求模型移除此类话术重新表达或者劝导
+tag 模型 system prompt 要有五大类话术的类型+描述+示例词汇， 指导 给出最明显的两个类别/关键词  
+转译模型 主播说的话+你识别出的类别，要求模型移除此类话术重新表达或者劝导  
 
-{
-    tag:list
-    keyword: list
-    content: string
-}
+{  
+    tag:list  
+    keyword: list  
+    content: string  
+}  
 
-弹幕内容：
+弹幕内容：  
 
-AI 识别到了关键词 keyboard list，属于tag类别的劝诱
-content
+AI 识别到了关键词 keyboard list，属于tag类别的劝诱  
+content  
 
-D组只念content
+D组只念content  
 
-1. 给出文内容 -〉 声音 的ai
-2. 带时间戳的 网页 代码 输入音频，输出文字，
+1. 给出文内容 -〉 声音 的ai  
+2. 带时间戳的 网页 代码 输入音频，输出文字，  
 
-开发 一套材料 视频，图片，带时间戳的文字内容，问卷内容
+开发 一套材料 视频，图片，带时间戳的文字内容，问卷内容  
 
-视频 -> 音频 -> 先画音轨，取一个阈值，低于阈值认为说完 -> 划分（音频文件名+对应的时间）字典 -> （音频文件 - 文字）loop + 时间 -> json
+视频 -> 音频 -> 先画音轨，取一个阈值，低于阈值认为说完 -> 划分（音频文件名+对应的时间）字典 -> （音频文件 - 文字）loop + 时间 -> json  
 
-{
-    timestamp
+{  
+    timestamp  
     content
-}
+}  
