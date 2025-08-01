@@ -1,0 +1,503 @@
+[
+  {
+    "id": "2-1",
+    "name": "AKF唇泥唇霜唇釉",
+    "brand": "AKF",
+    "price": {
+      "current": 35,
+      "original": 45,
+      "live_price": 29.9,
+      "price_comparison": "直播优惠17%"
+    },
+    "sales_volume": "已售1万+",
+    "rating": 5.0,
+    "reviews_count": "1万+",
+    "colors": ["M01肉桂赤茶", "M02樱桃乳酪", "M04冰糖甜柿", "M07海盐太妃糖", "M08酒渍车厘子", "M09焦糖巧克力", "M11焦糖烤栗", "M12枫糖姜饼", "M14莓莓酒酿", "M15生梅甜酒", "M16白桃甜茶", "M17无花果烤奶", "M18冷泡山楂", "M19树莓奶泡", "M20杏仁燕麦奶", "M21西柚朗姆", "M22盐焗花生", "M23多肉粉荔", "M24红梨醉酒", "M25赤豆暖茶"],
+    "features": ["雾面丝绒", "显白", "持久"],
+    "positive_keywords": ["毫无色差", "不拔干", "叠涂好看"],
+    "negative_keywords": ["有刺鼻气味"],
+    "real_review": "玲珑小巧，颜色很显白超级喜欢 —— @杨**嘘 2025年6月25日",
+    "shipping_info": ["48小时内发货", "上海发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "2-2",
+    "name": "ROZO柔焦雾感唇泥",
+    "brand": "ROZO",
+    "price": {
+      "current": 29.9,
+      "original": 29.9,
+      "live_price": 29.9,
+      "price_comparison": "直播持平"
+    },
+    "sales_volume": "已售300+",
+    "rating": 4.9,
+    "reviews_count": "100+",
+    "colors": ["PD01#法式奶茶", "PD02#慵懒裸杏", "PD03#梅子软糖", "PD04#冷感灰紫", "PD05#一口桃子", "PD06#蔷薇花墙"],
+    "features": ["易上色", "提升气色"],
+    "positive_keywords": ["持妆力持久", "不拔干", "气味好闻", "显色"],
+    "negative_keywords": [],
+    "real_review": "颜色很搭，质地丝滑好推开 —— @毛**0 2025年6月26日",
+    "shipping_info": ["72小时内发货", "广州发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "2-3",
+    "name": "植萃盈亮润唇油",
+    "brand": "无品牌",
+    "price": {
+      "current": 25,
+      "original": 27.8,
+      "live_price": 29.9,
+      "price_comparison": "直播溢价19%"
+    },
+    "sales_volume": "已售100+",
+    "rating": 4.8,
+    "reviews_count": "4",
+    "colors": ["01初恋小蜜糖", "02晶透蜜桃", "03波波樱桃", "04甜蜜火龙果", "05元气杏子", "06神秘紫罗兰"],
+    "features": ["润泽", "玻璃唇"],
+    "positive_keywords": ["润唇效果好", "颜色自然"],
+    "negative_keywords": [],
+    "real_review": "客服推荐的颜色很适合我，发货快 —— @t**4 2025年7月25日",
+    "shipping_info": ["预计3-5天发货", "山东青岛发货"],
+    "return_policy": ["支持退换"]
+  },
+  {
+    "id": "3-1",
+    "name": "juduo橘朵眼影盘玩趣七色",
+    "brand": "JudydoLL/橘朵",
+    "price": {
+      "current": 39.01,
+      "original": 39.8,
+      "live_price": 79.8,
+      "price_comparison": "直播溢价104%"
+    },
+    "sales_volume": "已售1万+",
+    "rating": 5.0,
+    "reviews_count": "1万+",
+    "colors": ["#26原木盘", "#16生椰拿铁", "#17甜熏玫瑰", "#28烟木盘", "#01烟粉氛围盘", "#02橘棕氛围盘"],
+    "features": ["大地色", "多种质地", "带镜子"],
+    "positive_keywords": ["颜色很搭", "显色度好", "正品"],
+    "negative_keywords": ["粉质一般"],
+    "real_review": "很好用，多次购买 —— @6**z 2025年6月22日",
+    "shipping_info": ["48小时内发货", "上海发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "3-2",
+    "name": "AKF眼影盘七色2025新款",
+    "brand": "AKF",
+    "price": {
+      "current": 36.9,
+      "original": 59,
+      "live_price": 79.8,
+      "price_comparison": "直播溢价116%"
+    },
+    "sales_volume": "已售2万+",
+    "rating": 4.9,
+    "reviews_count": "2万+",
+    "colors": ["03琥珀奶咖", "04烟粉蔷薇", "02落日摩卡", "01荒野玫瑰"],
+    "features": ["哑光亮片", "日常淡妆", "赠眼影刷"],
+    "positive_keywords": ["颜色适合素颜", "活动价便宜", "好上色"],
+    "negative_keywords": ["粉质不好"],
+    "real_review": "颜色适合素颜，活动价超划算 —— @d**4 2025年6月13日",
+    "shipping_info": ["48小时内发货", "上海发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "3-3",
+    "name": "JUDYDOLL橘朵玩趣七色眼影盘",
+    "brand": "JudydoLL/橘朵",
+    "price": {
+      "current": 79.8,
+      "original": 93.9,
+      "live_price": 79.8,
+      "price_comparison": "直播持平"
+    },
+    "sales_volume": "已售5万+",
+    "rating": 5.0,
+    "reviews_count": "4000+",
+    "colors": ["#26原木盘", "#16生椰拿铁", "#17甜熏玫瑰", "#28烟木盘", "#01烟粉氛围盘", "#02橘棕氛围盘"],
+    "features": ["大地色", "8色以上", "带镜子"],
+    "positive_keywords": ["颜色很搭", "不会掉粉", "新手推荐"],
+    "negative_keywords": ["粉质一般"],
+    "real_review": "颜色很好看，一盘搞定妆容 —— @t**7 2025年5月19日",
+    "shipping_info": ["次日达超97%同行", "上海发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "4-1",
+    "name": "VEECCI唯资自动旋转眼线胶笔",
+    "brand": "VEECCI/唯资",
+    "price": {
+      "current": 9.61,
+      "original": 9.9,
+      "live_price": 19.9,
+      "price_comparison": "直播溢价107%"
+    },
+    "sales_volume": "已售1万+",
+    "rating": 4.9,
+    "reviews_count": "1万+",
+    "colors": ["#03经典棕", "#02复古棕", "#04自然黑", "#05脏脏粉", "#06酒红色", "#01墨绿色"],
+    "features": ["防水", "防晕染", "持久"],
+    "positive_keywords": ["不晕染", "新手推荐", "棕色自然"],
+    "negative_keywords": ["易晕染"],
+    "real_review": "灰常好用，价格划算，不容易脱妆 —— @t**7 2025年5月9日",
+    "shipping_info": ["48小时内发货", "广州发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "4-2",
+    "name": "VEECCI唯资自动旋转双头眉笔",
+    "brand": "VEECCI/唯资",
+    "price": {
+      "current": 9.9,
+      "original": 9.9,
+      "live_price": 19.9,
+      "price_comparison": "直播溢价101%"
+    },
+    "sales_volume": "已售1000+",
+    "rating": 4.9,
+    "reviews_count": "1000+",
+    "colors": ["05褐色", "01自然棕", "02灰棕色", "03浅咖啡", "04深咖啡", "06深灰色"],
+    "features": ["防水", "不晕染", "持久"],
+    "positive_keywords": ["使用效果好", "回购率高", "价格便宜"],
+    "negative_keywords": [],
+    "real_review": "活动价很便宜，还会继续回购 —— @y**e 2025年7月7日",
+    "shipping_info": ["平均11小时发货", "广州发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "4-3",
+    "name": "veecci唯资眼线液笔胶笔棕色",
+    "brand": "VEECCI/唯资",
+    "price": {
+      "current": 27.8,
+      "original": 32,
+      "live_price": 19.9,
+      "price_comparison": "直播优惠-28%"
+    },
+    "sales_volume": "已售9万+",
+    "rating": 4.9,
+    "reviews_count": "1万+",
+    "colors": ["#03经典棕", "#02复古棕", "#04自然黑", "#05脏脏粉", "#06酒红色", "#01墨绿色"],
+    "features": ["防晕染", "持久", "极细"],
+    "positive_keywords": ["新手推荐", "棕色自然", "不晕染"],
+    "negative_keywords": ["不好晕染"],
+    "real_review": "黄二白新手使用好上色，化妆师推荐 —— @邹**5 2025年7月23日",
+    "shipping_info": ["平均12小时发货", "东莞发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "5-1",
+    "name": "雪里里24排免胶自粘太阳花睫毛书",
+    "brand": "雪里里",
+    "price": {
+      "current": 6.9,
+      "original": 7.9,
+      "live_price": 9.9,
+      "price_comparison": "直播溢价43%"
+    },
+    "sales_volume": "已售10万+",
+    "rating": 5.0,
+    "reviews_count": "4万+",
+    "features": ["免胶自粘", "浓密卷翘", "自然仿真"],
+    "positive_keywords": ["新手易上手", "粘性好", "自然"],
+    "negative_keywords": ["黏腻感"],
+    "real_review": "新手党易上手，粘的挺牢，适合手残党 —— @王**遇 2025年7月9日",
+    "shipping_info": ["平均11小时发货", "中国大陆发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "5-2",
+    "name": "OEIEZ欧亿姿山茶花假睫毛",
+    "brand": "OEIEZ/欧亿姿",
+    "price": {
+      "current": 12.3,
+      "original": 14.8,
+      "live_price": 9.9,
+      "price_comparison": "直播优惠-20%"
+    },
+    "sales_volume": "已售1万+",
+    "rating": 5.0,
+    "reviews_count": "9000+",
+    "features": ["免胶", "轻盈无感", "韩系自然"],
+    "positive_keywords": ["性价比高", "自然服帖", "会回购"],
+    "negative_keywords": ["粘性不好"],
+    "real_review": "外表很好看，使用情况很好，会回购 —— @寄**柔 2025年7月15日",
+    "shipping_info": ["平均9小时发货", "中国大陆发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "5-3",
+    "name": "ZNK清透狐系苏妲己假睫毛",
+    "brand": "ZNK（美妆）",
+    "price": {
+      "current": 14.9,
+      "original": 15.9,
+      "live_price": 9.9,
+      "price_comparison": "直播优惠-34%"
+    },
+    "sales_volume": "已售1万+",
+    "rating": 4.9,
+    "reviews_count": "6000+",
+    "features": ["分段式", "浓密狐狸眼", "自然仿真"],
+    "positive_keywords": ["浓度高", "适合浓妆", "新手好用"],
+    "negative_keywords": ["不服贴"],
+    "real_review": "浓度很高，适合浓妆，新手党挺好用 —— @t**8 2025年7月18日",
+    "shipping_info": ["平均11小时发货", "河南郑州发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "9-1",
+    "name": "珂曼精华唇蜜",
+    "brand": "caremille/珂曼",
+    "price": {
+      "current": 49,
+      "original": 49,
+      "live_price": 69,
+      "price_comparison": "直播溢价41%"
+    },
+    "sales_volume": "已售200+",
+    "rating": 4.9,
+    "reviews_count": "30+",
+    "colors": ["01雨后玫瑰", "02阳光苦茶", "03和风软杏", "04晨露白桃", "05一轮乌木"],
+    "features": ["水光镜面", "保湿", "显白"],
+    "positive_keywords": ["水光效果好", "保湿自然", "包装精美"],
+    "negative_keywords": [],
+    "real_review": "像润唇膏但涂上像唇蜜，唇纹不见了 —— @影**寞 2025年6月27日",
+    "shipping_info": ["平均9小时发货", "苏州发货"],
+    "return_policy": ["支持退换"]
+  },
+  {
+    "id": "9-2",
+    "name": "法国灰太太珂曼精华唇蜜",
+    "brand": "caremille/珂曼",
+    "price": {
+      "current": 49,
+      "original": 49,
+      "live_price": 69,
+      "price_comparison": "直播溢价41%"
+    },
+    "sales_volume": "已售200+",
+    "rating": 5.0,
+    "reviews_count": "4",
+    "colors": ["01雨后玫瑰", "02阳光苦茶", "03和风软杏", "04晨露白桃", "05一轮乌木"],
+    "features": ["提升气色", "水光镜面", "保湿"],
+    "positive_keywords": ["质量不错", "自然水光"],
+    "negative_keywords": [],
+    "real_review": "质量不错，水光效果自然 —— @p**a 2025年7月21日",
+    "shipping_info": ["次日达超91%同行", "苏州发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "9-3",
+    "name": "李佳琪推荐持久水润玻璃嘟嘟唇润唇油",
+    "brand": "无品牌",
+    "price": {
+      "current": 25,
+      "original": 27.8,
+      "live_price": 69,
+      "price_comparison": "直播溢价176%"
+    },
+    "sales_volume": "已售100+",
+    "rating": 4.8,
+    "reviews_count": "4",
+    "colors": ["01初恋小蜜糖", "02晶透蜜桃", "03波波樱桃", "04甜蜜火龙果", "05元气杏子", "06神秘紫罗兰"],
+    "features": ["玻璃唇", "滋润", "显色"],
+    "positive_keywords": ["润唇效果好", "颜色自然", "性价比高"],
+    "negative_keywords": [],
+    "real_review": "润唇效果还可以，颜色自然 —— @用户匿名",
+    "shipping_info": ["48小时内发货", "成都发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "14-1",
+    "name": "丝绨遮瑕膏遮盖黑眼圈痘印斑点",
+    "brand": "CIDE/丝绨",
+    "price": {
+      "current": 45.8,
+      "original": 45.8,
+      "live_price": 169,
+      "price_comparison": "直播溢价269%"
+    },
+    "sales_volume": "已售1万+",
+    "rating": 4.7,
+    "reviews_count": "5000+",
+    "colors": ["130浅米色", "140自然色", "141中肤色", "151深肤色", "152深色", "153巧克力色", "181白色"],
+    "features": ["遮瑕", "提亮肤色", "遮盖斑点", "不干皮"],
+    "positive_keywords": ["遮瑕效果强", "性价比高", "不卡粉"],
+    "negative_keywords": ["个别色号偏干"],
+    "real_review": "遮瑕效果厉害，发货快 —— @梦**空 2025年6月23日",
+    "shipping_info": ["48小时内发货", "广东东莞发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "14-2",
+    "name": "ZFC吉祥色彩虫草粉底膏试色小样",
+    "brand": "ZFC",
+    "price": {
+      "current": 9.5,
+      "original": 9.5,
+      "live_price": 169,
+      "price_comparison": "直播溢价1678%"
+    },
+    "sales_volume": "已售100+",
+    "rating": 4.6,
+    "reviews_count": "48",
+    "colors": ["01象牙白", "02自然色", "03深肤色"],
+    "features": ["试色小样", "虫草养肤", "便携"],
+    "positive_keywords": ["试色方便", "包装小巧"],
+    "negative_keywords": ["正装偏贵"],
+    "real_review": "还好买的小样，正装可能不适合 —— @云**e 2025年7月20日",
+    "shipping_info": ["48小时内发货", "成都发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "14-3",
+    "name": "吉祥色彩虫草奢润粉底膏",
+    "brand": "吉祥色彩",
+    "price": {
+      "current": 239,
+      "original": 279,
+      "live_price": 169,
+      "price_comparison": "直播优惠-29%"
+    },
+    "sales_volume": "已售12",
+    "rating": 5.0,
+    "reviews_count": "暂无评价",
+    "colors": ["象牙白", "自然色", "深肤色"],
+    "features": ["粉底膏", "虫草养肤", "遮瑕保湿", "控油"],
+    "positive_keywords": [],
+    "negative_keywords": [],
+    "real_review": "暂时还没有评价呢~",
+    "shipping_info": ["48小时内发货", "成都发货"],
+    "return_policy": ["7天无理由退货", "极速退款", "假一赔四"]
+  },
+  {
+    "id": "15-1",
+    "name": "泊本6D玻尿酸保湿修护水乳套装",
+    "brand": "泊本",
+    "price": {
+      "current": 169,
+      "original": 199,
+      "live_price": 149,
+      "price_comparison": "直播优惠-12%"
+    },
+    "sales_volume": "已售8万+",
+    "rating": 5.0,
+    "reviews_count": "3万+",
+    "colors": ["水100ml+乳80g", "水200ml+乳80g", "水100ml+乳80g+洁面120g"],
+    "features": ["玻尿酸", "敏感肌适用", "补水修护", "温和舒缓"],
+    "positive_keywords": ["补水效果好", "清爽不油腻", "敏感肌无刺激"],
+    "negative_keywords": [],
+    "real_review": "刚涂上很清爽，补水效果很好 —— @g**1 2025年7月13日",
+    "shipping_info": ["预计3小时内发货", "浙江宁波发货"],
+    "return_policy": ["7天无理由退货", "极速退款", "过敏包退"]
+  },
+  {
+    "id": "15-2",
+    "name": "泊本6D玻尿酸水乳护肤套装小样",
+    "brand": "泊本",
+    "price": {
+      "current": 9.9,
+      "original": 29.9,
+      "live_price": 149,
+      "price_comparison": "直播溢价1404%"
+    },
+    "sales_volume": "已售2000+",
+    "rating": 5.0,
+    "reviews_count": "1万+",
+    "colors": ["干敏水20ml+干敏乳10g"],
+    "features": ["试用装", "敏感肌", "补水舒缓"],
+    "positive_keywords": ["无刺激", "保湿好", "适合干皮"],
+    "negative_keywords": [],
+    "real_review": "品牌的就是好，保湿不油腻 —— @g**1 2025年7月23日",
+    "shipping_info": ["4小时内发货", "成都发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "15-3",
+    "name": "泊本姜黄素控油修护水乳套装",
+    "brand": "泊本",
+    "price": {
+      "current": 169,
+      "original": 199,
+      "live_price": 149,
+      "price_comparison": "直播优惠-12%"
+    },
+    "sales_volume": "已售4万+",
+    "rating": 5.0,
+    "reviews_count": "6000+",
+    "colors": ["水100ml+乳80g+洁颜蜜120ml", "水100ml+乳80g+特护霜15g", "水200ml+乳80g"],
+    "features": ["姜黄素", "祛痘", "控油舒缓", "敏感肌适用"],
+    "positive_keywords": ["控油好", "祛痘有效", "清爽不油腻"],
+    "negative_keywords": [],
+    "real_review": "美白效果挺好，一点也不油腻 —— @幸**2 2025年7月26日",
+    "shipping_info": ["4小时内发货", "成都发货"],
+    "return_policy": ["7天无理由退货", "极速退款", "过敏包退"]
+  },
+  {
+    "id": "16-1",
+    "name": "POLAN珀澜日不落持妆粉底液",
+    "brand": "珀澜",
+    "price": {
+      "current": 49.9,
+      "original": 49.9,
+      "live_price": 49.9,
+      "price_comparison": "直播持平"
+    },
+    "sales_volume": "已售4000+",
+    "rating": 4.8,
+    "reviews_count": "4000+",
+    "colors": ["自然色", "象牙白"],
+    "features": ["持妆24小时", "遮瑕", "哑光质地", "赠粉扑+试用装"],
+    "positive_keywords": ["持妆久", "遮瑕强", "服帖不卡粉"],
+    "negative_keywords": [],
+    "real_review": "用上去很好用，活动价超优惠 —— @h**巴 2025年6月23日",
+    "shipping_info": ["48小时内发货", "广东广州发货"],
+    "return_policy": ["30天价保", "极速退款"]
+  },
+  {
+    "id": "16-2",
+    "name": "珀澜哑光防水粉底液",
+    "brand": "OTHERS",
+    "price": {
+      "current": 49.9,
+      "original": 49.9,
+      "live_price": 49.9,
+      "price_comparison": "直播持平"
+    },
+    "sales_volume": "已售1000+",
+    "rating": 4.5,
+    "reviews_count": "1000+",
+    "colors": ["自然色", "象牙白"],
+    "features": ["防水防汗", "遮瑕持久", "赠粉扑+试用装"],
+    "positive_keywords": ["带妆久", "性价比高", "回购率高"],
+    "negative_keywords": [],
+    "real_review": "用的效果很好，经常来回购 —— @t**9 2025年5月29日",
+    "shipping_info": ["48小时内发货", "成都发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  },
+  {
+    "id": "16-3",
+    "name": "UKISS微雾锁妆粉底液",
+    "brand": "UKISS/悠珂思",
+    "price": {
+      "current": 54.9,
+      "original": 64.9,
+      "live_price": 49.9,
+      "price_comparison": "直播优惠-9%"
+    },
+    "sales_volume": "已售400+",
+    "rating": 5.0,
+    "reviews_count": "400+",
+    "colors": ["0N1自然白", "0W1暖阳白", "1N1中性白", "1W1暖肤白"],
+    "features": ["12小时持妆", "适合干皮/油皮", "轻薄遮瑕"],
+    "positive_keywords": ["妆感自然", "性价比高", "不卡粉"],
+    "negative_keywords": [],
+    "real_review": "妆感自然，会回购 —— @t**1 2025年7月24日",
+    "shipping_info": ["3小时内发货", "江苏淮安发货"],
+    "return_policy": ["7天无理由退货", "极速退款"]
+  }
+]

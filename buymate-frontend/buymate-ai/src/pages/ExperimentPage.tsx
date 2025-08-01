@@ -1,8 +1,40 @@
+// src/pages/ExperimentPage.tsx
+import { useState, useEffect, useRef } from 'react';
+import styles from './ExperimentPage.module.css';
+
 export default function ExperimentPage() {
-  return (
-    <div>
-      <h1>实验页面</h1>
-      <p>这里是视频和图片实验内容展示。</p>
-    </div>
-  );
+    const [rationalMode, setRationalMode] = useState(false);
+    const [videoPath, setVideoPath] = useState('clothes/10.mp4');
+    const videoRef = useRef<HTMLVideoElement>(null);
+
+    useEffect(() => {
+        setVideoPath('clothes/10.mp4');
+    }, [rationalMode]);
+
+    return (
+        <div className={styles.pageCenter}>
+            {/* 开关：相对于这个居中的容器左上角 */}
+            <label className={styles.switchWrapper}>
+                <input
+                    type="checkbox"
+                    checked={rationalMode}
+                    onChange={() => setRationalMode(prev => !prev)}
+                />
+                <span className={styles.slider} />
+                <span className={styles.labelText}>
+          理性消费模式
+        </span>
+            </label>
+            <div className={styles.videoBox}>
+                <video
+                    ref={videoRef}
+                    width={640}
+                    controls
+                    autoPlay
+                    key={videoPath}
+                    src={`/src/assets/videos/${videoPath}`}
+                />
+            </div>
+        </div>
+    );
 }

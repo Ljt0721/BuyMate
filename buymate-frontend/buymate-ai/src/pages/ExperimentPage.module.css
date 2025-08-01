@@ -1,0 +1,68 @@
+/* ExperimentPage.module.css */
+.videoBox {
+    display: flex;
+    justify-content: center;
+    place-content: center;
+    align-content: center;
+    width: 100%;
+}
+/* 整个开关容器（含文字 + 滑块） */
+.switchWrapper {
+    position: absolute;
+    top: 300px;           /* 原来 12px → 下移 20px */
+    left: 12px;
+    z-index: 10;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;            /* 文字与滑块间距 */
+
+    padding: 6px 10px;
+    background-color: #afafaf; /* 浅绿色背景 */
+    border-radius: 12px;       /* 圆角方框 */
+    cursor: pointer;
+    user-select: none;
+}
+
+/* 隐藏原生 checkbox */
+.switchWrapper input {
+    display: none;
+}
+
+/* 滑块轨道 */
+.slider {
+    position: relative;
+    width: 48px;
+    height: 24px;
+    background-color: #ccc;
+    border-radius: 24px;
+    transition: background-color 0.3s;
+}
+
+/* 滑块圆点 */
+.slider::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    width: 20px;
+    height: 20px;
+    background-color: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+/* 开启状态 */
+.switchWrapper input:checked + .slider {
+    background-color: #52c41a;
+}
+.switchWrapper input:checked + .slider::before {
+    transform: translateX(24px);
+}
+
+/* 淡黄色文字 */
+.labelText {
+    color: #faf4b7;   /* 淡黄色 */
+    font-weight: 500;
+    order: -1;        /* 让文字始终排在滑块左侧 */
+}
