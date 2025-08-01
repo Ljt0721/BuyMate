@@ -74,4 +74,18 @@ A JSON object indicating whether the experiment info was saved successfully.
 | `success`  | `bool`   | `true` if saved, otherwise `false` |
 | `error`    | `string` | Error message (only if failed)     |
 
+### Get video/image
+
+video:  
+
+```html
+<video src={`${config.BACKEND_BASE_URL}/media/videos/xx.mp4`} controls />
+```  
+
+image:  
+
+```html
+<img src={`${config.BACKEND_BASE_URL}/media/images/x-x.jpg`} />
+```  
+
 ## Questionnaire APIs
