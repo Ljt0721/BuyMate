@@ -1,19 +1,19 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import IntroPage     from './pages/IntroPage';
 import ExperimentPage from './pages/ExperimentPage';
-import QuestionnairePage from './pages/QuestionnairePage';
+import PreQuestionnaire from "./pages/PreQuestionnaire.tsx";
+import PostQuestionnaire from "./pages/PostQuestionnaire.tsx";
 
-function App() {
-  return (
-    <Router>
-      <nav>
-        <a href="/experiment">实验</a> | <a href="/questionnaire">问卷</a>
-      </nav>
-      <Routes>
-        <Route path="/experiment" element={<ExperimentPage />} />
-        <Route path="/questionnaire" element={<QuestionnairePage />} />
-      </Routes>
-    </Router>
-  );
+export default function App() {
+    return (
+        <BrowserRouter>
+            <Routes>
+                <Route path="/"           element={<IntroPage />} />
+                <Route path="/experiment" element={<ExperimentPage />} />
+                <Route path="/pre-questionnaire"  element={<PreQuestionnaire />} />
+                <Route path="/post-questionnaire" element={<PostQuestionnaire />} />
+                <Route path="*"           element={<Navigate to="/" />} />
+            </Routes>
+        </BrowserRouter>
+    );
 }
-
-export default App;
