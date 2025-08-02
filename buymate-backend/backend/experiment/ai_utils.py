@@ -10,6 +10,17 @@ from openai import OpenAI
 #配置日志
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+import dashscope
+from dashscope.audio.tts_v2 import *
+
+dashscope.api_key = "sk-f7e82c6b70be4fa8bfd51d4971b90abb"
+model = "cosyvoice-v2"
+voice = "longxiaochun_v2"
+
+synthesizer = SpeechSynthesizer(model=model, voice=voice)
+
+
 default_tag = '''
 话术分类一：绝对化描述诱导：
 关键词类别：
@@ -62,7 +73,7 @@ class AIService:
         获取关键词和类型话术
         
         Args:
-            tag: 总类别表
+            tag: 总类别表,已经默认设置
             speech:主播的话
   
         
@@ -188,13 +199,36 @@ class AIService:
             return {
                 "suggested_speech": "生成失败"
             }
+        
+    def speak(self,text:str,filename:str = "output.mp3"):
+        """
+        播报文字为语音
+
+        Args:
+            text: 要播报的文本内容
+            filename: 保存音频的文件名，默认为 "output.mp3"
+
+        Returns:
+            None
+        """
+        audio = synthesizer.call(text)
+        print("TTS Request ID:", synthesizer.get_last_request_id())
+        with open(filename, "wb") as f:
+            f.write(audio)
+        os.system(f"start {filename}" if os.name == "nt" else f"afplay {filename} &")
 
 
+#测试用例
 if __name__ == "__main__":
+    # 创建 AIService 实例并测试功能
     ai_service = AIService()
-    tag_result = ai_service.get_tag(speech="我随便乱打的")
+    # 测试 get_tag 方法（识别类别）
+    tag_result = ai_service.get_tag(speech="只剩3件，快抢，马上就卖光了")
     if tag_result:
-        translation_result = ai_service.get_translation(tag_result,speech="我随便乱打的")
+        #测试 get_translation 方法（转译）
+        translation_result = ai_service.get_translation(tag_result,speech="只剩3件，快抢，马上就卖光了")
         if translation_result:
             print("Translation Result:", translation_result)
             print("Tag Result:", tag_result)
+            # 测试 speak 方法（播报语音）
+            ai_service.speak(translation_result["suggested_speech"])
