@@ -62,17 +62,15 @@ html, body { margin: 0; height: 100%; overflow: hidden; font-family: system-ui, 
 
 /* 右下角导出 */
 .bottomRight {
-    font-size: 35px;
+
     position: absolute;
     bottom: 50px;
     right: 50px;
-    border-radius: 100px;
-    background: #2b7711;
-    color: #fff;
-
-    padding: 20px 60px;
-    border: none;
+    font-size: 40px;
     cursor: pointer;
+    background: #2b7711;
+    padding: 35px 80px;
+    border-radius: 100px;
 }
 /* 弹窗 */
 
@@ -89,10 +87,11 @@ html, body { margin: 0; height: 100%; overflow: hidden; font-family: system-ui, 
     padding: 30px 40px;
     border-radius: 8px;
     text-align: center;
+    font-size: 30px;
 }
 .modal input {
     margin: 10px 0;
     padding: 6px 10px;
-    font-size: 16px;
+    font-size: 30px;
 }
 .modal button { margin: 10px 5px; }

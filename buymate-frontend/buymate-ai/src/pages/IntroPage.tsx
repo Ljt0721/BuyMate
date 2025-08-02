@@ -90,8 +90,8 @@ export default function IntroPage() {
             </div>
 
             {/* 右下角导出按钮 */}
-            <div className={styles.bottomRight}>
-                <button onClick={exportData}>数据集导出</button>
+            <div className={styles.bottomRight} onClick={exportData}>
+                数据集导出
             </div>
 
             {/* 弹窗 */}
