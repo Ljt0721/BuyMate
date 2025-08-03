@@ -1,68 +1,93 @@
-/* ExperimentPage.module.css */
-.videoBox {
+.page {
+    position: fixed;
+    inset: 0;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+/* 顶部栏 */
+.topBar {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 20px;
+}
+.back {
+    padding: 8px 16px; border-radius: 6px; background: #2b7711; color: #fff; border: none; cursor: pointer;
+}
+.groupInfo { font-size: 20px; }
+
+/* 主区域 */
+.main {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    padding: 40px;
+}
+
+/* 左侧控制 */
+.leftPanel {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.ctrl select { width: 100%; padding: 6px; font-size: 16px; }
+.btn {
+    padding: 12px 0;
+    border-radius: 8px;
+    background: #2b7711;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+.timer { font-size: 18px; }
+
+/* 媒体区 */
+/* 中间媒体容器 */
+.media {
+    position: relative;          /* 让子元素可以绝对定位 */
     display: flex;
     justify-content: center;
-    place-content: center;
-    align-content: center;
-    width: 100%;
-}
-/* 整个开关容器（含文字 + 滑块） */
-.switchWrapper {
-    position: absolute;
-    top: 300px;           /* 原来 12px → 下移 20px */
-    left: 12px;
-    z-index: 10;
-
-    display: inline-flex;
     align-items: center;
-    gap: 6px;            /* 文字与滑块间距 */
-
-    padding: 6px 10px;
-    background-color: #afafaf; /* 浅绿色背景 */
-    border-radius: 12px;       /* 圆角方框 */
-    cursor: pointer;
-    user-select: none;
 }
 
-/* 隐藏原生 checkbox */
-.switchWrapper input {
-    display: none;
+/* 手机壳背景图：放大到 400×800，再水平/垂直居中 */
+.phone {
+    width: 400px;
+    height: 800px;
+    object-fit: contain;         /* 保持比例不变形 */
 }
 
-/* 滑块轨道 */
-.slider {
-    position: relative;
-    width: 48px;
-    height: 24px;
-    background-color: #ccc;
-    border-radius: 24px;
-    transition: background-color 0.3s;
-}
-
-/* 滑块圆点 */
-.slider::before {
-    content: '';
+/* 视频：完全盖住手机壳中央区域 */
+.video {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    width: 20px;
-    height: 20px;
-    background-color: #fff;
-    border-radius: 50%;
-    transition: transform 0.3s;
+    top: 50%;
+    left: 50%;
+    width: 360px;
+    height: 640px;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    border-radius: 24px;
 }
 
-/* 开启状态 */
-.switchWrapper input:checked + .slider {
-    background-color: #52c41a;
+/* 右下角按钮 */
+.bottomBtns {
+    position: absolute;
+    bottom: 30px;
+    right: 30px;
+    display: flex;
+    gap: 20px;
 }
-.switchWrapper input:checked + .slider::before {
-    transform: translateX(24px);
+.buy, .nobuy {
+    padding: 16px 40px;
+    border-radius: 100px;
+    font-size: 24px;
+    border: none;
+    cursor: pointer;
 }
-
-/* 淡黄色文字 */
-.labelText {
-    color: #faf4b7;   /* 淡黄色 */
-    font-weight: 500;
-    order: -1;        /* 让文字始终排在滑块左侧 */
-}
+.buy   { background: #52c41a; color: #fff; }
+.nobuy { background: #ff4d4f; color: #fff; }
