@@ -4,6 +4,7 @@
     color: #fff;
     display: flex;
     flex-direction: column;
+    font-size: 35px;
 }
 
 /* 顶部栏 */
@@ -14,9 +15,33 @@
     padding: 20px;
 }
 .back {
-    padding: 8px 16px; border-radius: 6px; background: #2b7711; color: #fff; border: none; cursor: pointer;
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    border: 2px solid #07C160;
+    background: #ffffff;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
-.groupInfo { font-size: 20px; }
+.back img {
+    width: 50px;
+    height: 50px;
+    pointer-events: none;   /* 让点击事件落在按钮本身 */
+}
+.groupInfo {
+    width: 400px;
+    height: 90px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 35px;
+    background: #f9f9f9;
+    color: #3d9712;
+    border: 2px solid #3d9712;
+    border-radius: 12px;
+}
 
 /* 主区域 */
 .main {
@@ -29,65 +54,75 @@
     padding: 40px;
 }
 
-/* 左侧控制 */
 .leftPanel {
+    z-index: 10;
+    width: 300px;
     display: flex;
+    padding-left: 300px;
     flex-direction: column;
     gap: 20px;
+    row-gap: 30px;
 }
-.ctrl select { width: 100%; padding: 6px; font-size: 16px; }
+.ctrl select {
+    height: 80px;
+    width: 300px;
+    padding: 10px;
+    font-size: 35px; }
 .btn {
+    height: 80px;
+    width: 300px;
     padding: 12px 0;
     border-radius: 8px;
-    background: #2b7711;
+    background: #3d9712;
     color: #fff;
     border: none;
     cursor: pointer;
 }
-.timer { font-size: 18px; }
+.timer {
+    width:300px;
+    font-size: 18px;
+}
 
-/* 媒体区 */
-/* 中间媒体容器 */
 .media {
-    position: relative;          /* 让子元素可以绝对定位 */
+    position: relative;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
-/* 手机壳背景图：放大到 400×800，再水平/垂直居中 */
-.phone {
-    width: 400px;
-    height: 800px;
-    object-fit: contain;         /* 保持比例不变形 */
-}
-
-/* 视频：完全盖住手机壳中央区域 */
 .video {
     position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 360px;
-    height: 640px;
+    top: 49%;
+    left: 49.6%;
+    width: 470px;
+    height: 940px;
     transform: translate(-50%, -50%);
-    z-index: 2;
-    border-radius: 24px;
+    z-index: 1;
+    border-radius: 80px;
 }
-
+.phone {
+    width: 560px;
+    height: 1220px;
+    z-index: 2;
+    object-fit: contain;         /* 保持比例不变形 */
+}
 /* 右下角按钮 */
 .bottomBtns {
     position: absolute;
-    bottom: 30px;
-    right: 30px;
+    flex-direction: column;
+    bottom: 50px;
+    right: 50px;
     display: flex;
-    gap: 20px;
+    gap: 30px;
 }
 .buy, .nobuy {
+    height: 80px;
+    width: 300px;
     padding: 16px 40px;
     border-radius: 100px;
-    font-size: 24px;
+    font-size: 35px;
     border: none;
     cursor: pointer;
 }
-.buy   { background: #52c41a; color: #fff; }
-.nobuy { background: #ff4d4f; color: #fff; }
+.buy   { background: #2b7711; color: #f4f0ce; }
+.nobuy { background: #2b7711; color: #f4f0ce; }

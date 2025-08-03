@@ -58,7 +58,9 @@ export default function ExperimentPage() {
         <div className={styles.page}>
             {/* 左上角 */}
             <div className={styles.topBar}>
-                <button onClick={() => nav('/')} className={styles.back}>返回</button>
+                <button className={styles.back} onClick={() => nav('/')}>
+                    <img src={`${config.BACKEND_BASE_URL}/media/images/back.png`} alt="" />
+                </button>
                 <span className={styles.groupInfo}>{group}组：{GROUP_DESC[group]}</span>
             </div>
 
