@@ -1,7 +1,6 @@
 // src/pages/ExperimentPage.tsx
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './ExperimentPage.module.css';
 import config from '../config';
 
 const GROUP_DESC: Record<string, string> = {
@@ -13,17 +12,14 @@ const GROUP_DESC: Record<string, string> = {
 
 export default function ExperimentPage() {
     const nav = useNavigate();
-
-    /* ---------- 基础信息 ---------- */
-    const userId  = sessionStorage.getItem('exp:userId');
-    const group   = sessionStorage.getItem('exp:group') || 'A';
-
+    const userId = sessionStorage.getItem('exp:userId');
+    const group = sessionStorage.getItem('exp:group') || 'A';
     if (!userId) { nav('/'); return null; }
 
     /* ---------- 状态 ---------- */
-    const [expId, setExpId]   = useState(1);          // 1-32
-    const [startTs, setStart] = useState(0);          // 开始时间戳
-    const [timeUsed, setTime] = useState(0);          // 耗时 ms
+    const [expId, setExpId] = useState(1);
+    const [startTs, setStart] = useState(0);
+    const [timeUsed, setTime] = useState(0);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     /* ---------- 计时器 ---------- */
@@ -34,81 +30,222 @@ export default function ExperimentPage() {
     }, [startTs]);
 
     /* ---------- 动作 ---------- */
-    const startExp = () => {
-        if (!videoRef.current) return;
-        videoRef.current.play();
-        setStart(Date.now());
-    };
-
-    const stopExp = () => {
-        if (videoRef.current) videoRef.current.pause();
-        setTime(Date.now() - startTs);
-        setStart(0);
-    };
-
-    const record = (buy: boolean) => {
+    const startExp = () => { videoRef.current?.play(); setStart(Date.now()); };
+    const stopExp  = () => { videoRef.current?.pause(); setTime(Date.now() - startTs); setStart(0); };
+    const record   = (buy: boolean) => {
         if (!startTs) return alert('请先完成实验');
         sessionStorage.setItem('exp:choice', String(buy));
         sessionStorage.setItem('exp:choiceTime', String(timeUsed));
         sessionStorage.setItem('exp:expId', String(expId));
-        nav('/post-questionnaire');   // 去后问卷
+        nav('/post-questionnaire');
     };
 
+    /* ---------- 渲染 ---------- */
     return (
-        <div className={styles.page}>
-            {/* 左上角 */}
-            <div className={styles.topBar}>
-                <button className={styles.back} onClick={() => nav('/')}>
-                    <img src={`${config.BACKEND_BASE_URL}/media/images/back.png`} alt="" />
+        <div
+            style={{
+                width: '100vw',
+                height: '100vh',
+                display: 'flex',
+                flexDirection: 'column',
+                color: '#fff',
+                fontFamily: 'system-ui, sans-serif',
+                overflow: 'hidden',
+            }}
+        >
+            {/* ---------- 顶部 ---------- */}
+            <header
+                style={{
+                    position: 'absolute',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '2vmin',
+                    padding: '2vmin 3vmin',
+                    flexShrink: 0,
+                }}
+            >
+                <button
+                    style={{
+                        width: '5vw',
+                        height: '5vw',
+                        borderRadius: '50%',
+                        border: '0.1vw solid #07C160',
+                        background: '#fff',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => nav('/')}
+                >
+                    <img
+                        src={`${config.BACKEND_BASE_URL}/media/images/back.png`}
+                        alt="back"
+                        style={{ width: '2vw', height: '2vw', pointerEvents: 'none' }}
+                    />
                 </button>
-                <span className={styles.groupInfo}>{group}组：{GROUP_DESC[group]}</span>
-            </div>
+                <span
+                    style={{
+                        padding: '1vmin 3vmin',
+                        background: '#f9f9f9',
+                        color: '#3d9712',
+                        border: '0.2vmin solid #3d9712',
+                        borderRadius: '1.2vmin',
+                        fontSize: '2.5vw',
+                    }}
+                >
+          {group}组：{GROUP_DESC[group]}
+        </span>
+            </header>
 
-            {/* 中间内容 */}
-            <div className={styles.main}>
-                {/* 左侧控制 */}
-                <div className={styles.leftPanel}>
-                    <div className={styles.ctrl}>
-                        <label>实验编号</label>
-                        <select value={expId} onChange={e => setExpId(Number(e.target.value))}>
-                            {Array.from({ length: 32 }, (_, i) => (
-                                <option key={i + 1} value={i + 1}>{i + 1}</option>
-                            ))}
-                        </select>
-                    </div>
+            {/* ---------- 主体 ---------- */}
+            <main
+                style={{
+                    flex: 1,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    padding: '2vmin',
+                }}
+            >
+                {/* 左侧控制面板 */}
+                <aside
+                    style={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        gap: '2vw',
+                        marginRight: '5vw',
+                        width: '15vw',
+                        minWidth: 200,
+                        transform: 'translate(-40vh, 0vh)'
+                    }}
+                >
+                    <label style={{ fontSize: 'clamp(2vw, 2vw, 2vw)', color: '#000' }}>
+                        实验编号
+                    </label>
+                    <select
+                        value={expId}
+                        onChange={(e) => setExpId(Number(e.target.value))}
+                        style={{
+                            fontSize: '2vw',
+                            padding: '1vmin',
+                            borderRadius: '1vmin',
+                        }}
+                    >
+                        {Array.from({ length: 32 }, (_, i) => (
+                            <option key={i + 1} value={i + 1}>{i + 1}</option>
+                        ))}
+                    </select>
 
-                    <button className={styles.btn} onClick={startExp}>开始实验</button>
-                    <button className={styles.btn} onClick={stopExp}>结束实验</button>
+                    <button
+                        onClick={startExp}
+                        style={{
+                            fontSize: '2vw',
+                            padding: '1.5vmin 0',
+                            background: '#3d9712',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '1vmin',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        开始实验
+                    </button>
+                    <button
+                        onClick={stopExp}
+                        style={{
+                            fontSize: '2vw',
+                            padding: '1.5vmin 0',
+                            background: '#3d9712',
+                            color: '#fff',
+                            border: 'none',
+                            borderRadius: '1vmin',
+                            cursor: 'pointer',
+                        }}
+                    >
+                        结束实验
+                    </button>
 
-                    <div className={styles.timer}>
+                    <div style={{ fontSize: '1vw', color: '#000' }}>
                         用时：{(timeUsed / 1000).toFixed(2)} 秒
                     </div>
-                </div>
+                </aside>
 
-                {/* 中间媒体 */}
-                <div className={styles.media}>
-                    {/* 手机壳占位图 */}
-                    <img
-                        className={styles.phone}
-                        src={`${config.BACKEND_BASE_URL}/media/images/phone.png`}
-                        alt="phone"
-                    />
-                    {/* 视频 */}
+                {/* ---------- 手机 + 视频 ---------- */}
+                <div
+                    style={{
+                        position: 'absolute',
+                        width: '50vh',
+                        height: '95vh',
+                    }}
+                >
                     <video
                         ref={videoRef}
-                        className={styles.video}
+                        style={{
+                            position: 'absolute',
+                            width: '50vh',
+                            height: '95vh',
+                            borderRadius: '6vmin',
+                            zIndex: 1,
+                        }}
                         src={`${config.BACKEND_BASE_URL}/media/videos/${expId}.mp4`}
                         controls
                         preload="metadata"
                     />
+                    <img
+                        src={`${config.BACKEND_BASE_URL}/media/images/phone.png`}
+                        alt="phone"
+                        style={{
+                            position: 'absolute',
+                            inset: 0,
+                            width: '70vh',
+                            height: '103vh',
+                            objectFit: 'contain',
+                            zIndex: 2,
+                            pointerEvents: 'none',
+                            transform: 'translate(-9vh, -3vh)',
+                        }}
+                    />
                 </div>
-            </div>
+            </main>
 
-            {/* 右下角 */}
-            <div className={styles.bottomBtns}>
-                <button className={styles.buy} onClick={() => record(true)}>购买此商品</button>
-                <button className={styles.nobuy} onClick={() => record(false)}>不购买此商品</button>
-            </div>
+            {/* ---------- 右下角按钮 ---------- */}
+            <footer
+                style={{
+                    position: 'absolute',
+                    bottom: '2vw',
+                    right: '2vw',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2vw',
+                }}
+            >
+                <button
+                    onClick={() => record(true)}
+                    style={{
+                        fontSize: '2vw',
+                        padding: '1.5vmin 4vmin',
+                        borderRadius: '100vmin',
+                        border: 'none',
+                        background: '#2b7711',
+                        color: '#f4f0ce',
+                        cursor: 'pointer',
+                    }}
+                >
+                    购买此商品
+                </button>
+                <button
+                    onClick={() => record(false)}
+                    style={{
+                        fontSize: '2vw',
+                        padding: '1.5vmin 4vmin',
+                        borderRadius: '100vmin',
+                        border: 'none',
+                        background: '#2b7711',
+                        color: '#f4f0ce',
+                        cursor: 'pointer',
+                    }}
+                >
+                    不购买此商品
+                </button>
+            </footer>
         </div>
     );
 }
