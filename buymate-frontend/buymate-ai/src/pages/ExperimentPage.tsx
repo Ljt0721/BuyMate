@@ -32,12 +32,24 @@ export default function ExperimentPage() {
     /* ---------- 动作 ---------- */
     const startExp = () => { videoRef.current?.play(); setStart(Date.now()); };
     const stopExp  = () => { videoRef.current?.pause(); setTime(Date.now() - startTs); setStart(0); };
-    const record   = (buy: boolean) => {
-        if (!startTs) return alert('请先完成实验');
-        sessionStorage.setItem('exp:choice', String(buy));
-        sessionStorage.setItem('exp:choiceTime', String(timeUsed));
-        sessionStorage.setItem('exp:expId', String(expId));
-        nav('/post-questionnaire');
+    const record   = async (buy: boolean) => {
+        try {
+            await fetch(`${config.BACKEND_BASE_URL}/api/record`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    userId,
+                    expId,
+                    group,
+                    buy,
+                    timeUsed,
+                }),
+            });
+            alert('数据存储成功');
+        } catch (e) {
+            // 可选：出错时你想怎么处理，这里什么都不做就是“静默”
+            console.error(e);
+        }
     };
 
     /* ---------- 渲染 ---------- */
@@ -57,6 +69,7 @@ export default function ExperimentPage() {
             <header
                 style={{
                     position: 'absolute',
+
                     display: 'flex',
                     alignItems: 'center',
                     gap: '2vmin',
@@ -125,6 +138,7 @@ export default function ExperimentPage() {
                         onChange={(e) => setExpId(Number(e.target.value))}
                         style={{
                             fontSize: '2vw',
+                            width: '15vw',
                             padding: '1vmin',
                             borderRadius: '1vmin',
                         }}
@@ -138,6 +152,7 @@ export default function ExperimentPage() {
                         onClick={startExp}
                         style={{
                             fontSize: '2vw',
+                            width: '15vw',
                             padding: '1.5vmin 0',
                             background: '#3d9712',
                             color: '#fff',
@@ -152,6 +167,7 @@ export default function ExperimentPage() {
                         onClick={stopExp}
                         style={{
                             fontSize: '2vw',
+                            width: '15vw',
                             padding: '1.5vmin 0',
                             background: '#3d9712',
                             color: '#fff',
