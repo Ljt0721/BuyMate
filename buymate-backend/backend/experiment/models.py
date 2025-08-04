@@ -31,7 +31,7 @@ class ExperimentInfo(models.Model):
     id = models.AutoField(primary_key=True)
     subject_id = models.IntegerField()
     experiment_id = models.IntegerField()
-    subject_type = models.IntegerField()
+    subject_type = models.CharField(max_length=1)
     choice = models.BooleanField()
     choice_time = models.TimeField()
 

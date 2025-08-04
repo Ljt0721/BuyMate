@@ -61,7 +61,7 @@ A JSON object containing information about a subject's experiment result.
 | --------------- | -------- | ---------------------------------------------- |
 | `subject_id`    | `int`    | Subject's ID                                   |
 | `experiment_id` | `int`    | Associated experiment ID                       |
-| `subject_type`  | `int`    | Type of subject                                |
+| `subject_type`  | `string` | Type of subject(A,B,C,D)                       |
 | `choice`        | `bool`   | User's choice result                           |
 | `choice_time`   | `string` | Time taken for the choice                      |
 
@@ -88,4 +88,56 @@ image:
 <img src={`${config.BACKEND_BASE_URL}/media/images/x-x.jpg`} />
 ```  
 
-## Questionnaire APIs
+### Get AI Translation
+
+#### Get AI URL
+
+```bash
+GET /experiment_api/experiment/get_ai_translation/
+```
+
+#### Get AI Parameters
+
+A query string containing the original text to be translated and analyzed.
+
+| Field Name | Type     | Description                    |
+| ---------- | -------- | ------------------------------ |
+| `text`     | `string` | The input text to be processed |
+
+#### Get AI Return Data
+
+A JSON object containing AI-generated tags, keywords, and translation.
+
+| Field Name      | Type     | Description                                    |
+| --------------- | -------- | ---------------------------------------------- |
+| `success`       | `bool`   | `true` if processed successfully, else `false` |
+| `tags_list`     | `list`   | List of semantic tags (nullable)               |
+| `keywords_list` | `list`   | List of extracted keywords (nullable)          |
+| `translation`   | `string` | AI-generated translation (nullable)            |
+| `error`         | `string` | Error message (only if `success = false`)      |
+
+### Get Audio File
+
+#### Get Audio URL
+
+```bash
+GET /experiment_api/experiment/get_audio/
+```
+
+#### Get Audio Parameters
+
+A query string containing the text to convert into speech audio.
+
+| Field Name | Type     | Description                        |
+| ---------- | -------- | ---------------------------------- |
+| `text`     | `string` | The text content to be synthesized |
+
+#### Get Audio Return Data
+
+Returns: an **MP3 audio file** if success
+If fails, returns a JSON object:
+
+| Field Name | Type     | Description        |
+| ---------- | -------- | ------------------ |
+| `success`  | `bool`   | `false` if failed  |
+| `error`    | `string` | Reason for failure |
