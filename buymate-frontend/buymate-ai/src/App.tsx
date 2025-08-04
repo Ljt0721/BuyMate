@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import IntroPage     from './pages/IntroPage';
 import ExperimentPage from './pages/ExperimentPage';
-import PreQuestionnaire from "./pages/PreQuestionnaire.tsx";
-import PostQuestionnaire from "./pages/PostQuestionnaire.tsx";
+import PreQuestionnaire from "./pages/PreQuestionnaire";
+import PostQuestionnaire from "./pages/PostQuestionnaire";
 
 export default function App() {
     return (

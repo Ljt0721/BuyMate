@@ -82,8 +82,8 @@ def submit_post_questionnaire(request):
                 return JsonResponse({'success': False, 'error': 'sus_answers must be a list of 10 items'}, status=400)
 
             for val in data['sus_answers']:
-                if not isinstance(val, bool):
-                    return JsonResponse({'success': False, 'error': f'Invalid sus answer: {val}. Must be boolean'}, status=400)
+                if not isinstance(val, int) or not (1 <= val <= 5):
+                    return JsonResponse({'success': False, 'error': f'Invalid sus answer: {val}. Must be int between 1 and 5'}, status=400)
 
             if not isinstance(data['ueq_answers'], list) or len(data['ueq_answers']) != 26:
                 return JsonResponse({'success': False, 'error': 'ueq_answers must be a list of 26 items'}, status=400)

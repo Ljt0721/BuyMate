@@ -1,0 +1,134 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  box-sizing: border-box;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+section {
+  margin-bottom: 2.5rem;
+  width: 100%;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto; /* 保证左右居中 */
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* 子元素水平居中 */
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+}
+
+section select {
+  width: 100%;
+  max-width: 300px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+}
+
+section label {
+  margin: 1rem 0 0.5rem;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  max-width: 300px;
+}
+
+.checkboxGroup {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.checkboxGroup label {
+  align-self: flex-start;
+  margin: 1rem 0 0.5rem;
+  font-weight: bold;
+}
+
+.questionRow {
+  margin: 1.5rem 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.scale {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.scale button {
+  border: 1px solid #ccc;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  background: #eee;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: background-color 0.3s;
+}
+
+.scale button.selected {
+  background-color: #3182ce;
+  color: white;
+}
+
+.submitBtn {
+  padding: 1rem 2rem;
+  font-size: 1.1rem;
+  background: #3182ce;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 2rem;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.submitBtn:hover {
+  background-color: #2563eb;
+  transform: scale(1.05);
+}
+
+.description {
+  margin: 20px 0;
+  font-size: 16px;
+  line-height: 1.6;
+  color: #444;
+}
+
+.selectRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.selectLabel {
+  width: 100px; /* 或根据需要设置更宽 */
+  text-align: center;
+  font-weight: 500;
+  font-size: 14px;
+  color: #333;
+}
+
+.scale {
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  flex-grow: 1;
+}
