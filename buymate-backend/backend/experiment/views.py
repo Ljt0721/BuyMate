@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 from .models import ProductInfo, ExperimentInfo
 import json
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def get_products_by_experiment_id(request):
     experiment_id = request.GET.get('experiment_id')
     if not experiment_id:
@@ -36,6 +38,7 @@ def get_products_by_experiment_id(request):
     ]
     return JsonResponse({'products': data})
 
+@csrf_exempt
 def submit_experiment_info(request):
     if request.method == 'POST':
         try:

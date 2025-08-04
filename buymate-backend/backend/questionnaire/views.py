@@ -1,7 +1,9 @@
 from django.http import JsonResponse
 import json
 from .models import Pre_Questionnaire, Post_Questionnaire
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def submit_pre_questionnaire(request):
     if request.method == 'POST':
         try:
@@ -59,8 +61,10 @@ def submit_pre_questionnaire(request):
             return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
+    else:
+        return JsonResponse({'success': False, 'error': 'Invalid request method'}, status=405)
 
-
+@csrf_exempt
 def submit_post_questionnaire(request):
     if request.method == 'POST':
         try:

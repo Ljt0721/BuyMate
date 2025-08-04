@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Questionnaire.module.css';
+import config from '../config';
 
 const ibsQuestions = [
     '我买东西之前都会仔细考虑',
@@ -94,13 +95,41 @@ export default function PostQuestionnaire() {
         setUeq(newAnswers);
     };
 
-    const finish = () => {
+    const finish = async () => {
         if (!userId) return alert('缺少用户 ID');
         if (ibsAnswers.some(a => a < 1 || a > 7)) return alert('请完成所有 IBS 题目');
         if (accept.some(a => a < 1 || a > 5)) return alert('请完成所有系统接受度题目');
         if (ueq.some(a => a < 1 || a > 7)) return alert('请完成所有 UEQ 题目');
-        nav('/');
+
+        const payload = {
+            id: userId,
+            ibs_answers: ibsAnswers,
+            sus_answers: accept,
+            ueq_answers: ueq,
+        };
+
+        try {
+            const res = await fetch(`${config.BACKEND_BASE_URL}/questionnaire_api/submit-post-questionnaire/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+
+            const result = await res.json();
+
+            if (res.ok && result.success) {
+                sessionStorage.setItem('exp:postDone', '1');
+                sessionStorage.setItem('exp:postAnswers', JSON.stringify(payload));
+                nav('/');
+            } else {
+                alert(`提交失败：${result.error || '未知错误'}`);
+            }
+        } catch (err) {
+            console.error('提交出错:', err);
+            alert('提交失败，请检查网络连接');
+        }
     };
+
 
     return (
         <div className={styles.page}>
@@ -143,7 +172,7 @@ export default function PostQuestionnaire() {
                             <div className={styles.selectRow}>
                                 <span className={styles.selectLabel}>{leftWord}</span>
                                 <div className={styles.scale}>
-                                    {[1, 2, 3, 4, 5, 6, 7].map(n => (
+                                    {[1, 2, 3, 4, 5].map(n => (
                                         <button
                                             key={n}
                                             className={accept[i] === n ? styles.selected : ''}

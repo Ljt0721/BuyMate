@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Questionnaire.module.css';
+import config from '../config';
 
 const ageOptions = ['18-25', '26-35', '36-45', '46+'];
 const genderOptions = ['男', '女', '非二元', '不愿透露'];
@@ -57,13 +58,43 @@ export default function PreQuestionnaire() {
         setIbsAnswers(newAnswers);
     };
 
-    const finish = () => {
+    const finish = async () => {
         if (!userId) return alert('缺少用户 ID');
         if (![age, gender, education, income, frequency].every(Boolean)) return alert('请填写完整');
         if (channels.length === 0) return alert('请选择至少一个购物渠道');
         if (ibsAnswers.some(a => a < 1 || a > 7)) return alert('请完成所有 IBS 题目');
-        sessionStorage.setItem('exp:preDone', '1');
-        nav('/');
+
+        const payload = {
+            id: userId,
+            age,
+            gender,
+            education,
+            income,
+            shopping_preferences: channels,
+            live_shopping_frequency: frequency,
+            ibs_answers: ibsAnswers,
+        };
+
+        try {
+            const res = await fetch(`${config.BACKEND_BASE_URL}/questionnaire_api/submit-pre-questionnaire/`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(payload),
+            });
+
+            const result = await res.json();
+
+            if (res.ok && result.success) {
+                sessionStorage.setItem('exp:preDone', '1');
+                sessionStorage.setItem('exp:preAnswers', JSON.stringify(payload));
+                nav('/');
+            } else {
+                alert(`提交失败：${result.error || '未知错误'}`);
+            }
+        } catch (err) {
+            console.error('提交出错:', err);
+            alert('提交失败，请检查网络连接');
+        }
     };
 
     return (
