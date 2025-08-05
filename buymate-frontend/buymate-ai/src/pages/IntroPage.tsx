@@ -33,6 +33,12 @@ export default function IntroPage() {
         nav('/experiment');
     };
 
+    /* ---------- 进入结果 ---------- */
+    const goResult = () => {
+        if (!userId) return alert('请先输入用户 ID');
+        nav('/result');
+    };
+
     /* ---------- 数据集导出 ---------- */
     const exportData = async () => {
         if (!userId)   return alert('缺少用户 ID');
@@ -184,10 +190,26 @@ export default function IntroPage() {
             <footer
                 style={{
                     display: 'flex',
-                    justifyContent: 'flex-end',
-                    padding: '2vh 4vw',
+                    justifyContent: 'space-between', // 分居两侧
+                    alignItems: 'center',
+                    padding: '2vh 6vw', // 增大边距
                 }}
             >
+                <button
+                    style={{
+                        fontSize: 'clamp(2vw, 2vw, 2vw)',
+                        padding: '1vh 3vw',
+                        borderRadius: '100vh',
+                        border: 'none',
+                        background: '#2b7711',
+                        color: '#fff',
+                        cursor: 'pointer',
+                    }}
+                    onClick={goResult}
+                >
+                    决策结果汇总
+                </button>
+
                 <button
                     style={{
                         fontSize: 'clamp(2vw, 2vw, 2vw)',
