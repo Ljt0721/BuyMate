@@ -28,7 +28,7 @@ export default function ResultPage() {
     useEffect(() => {
         if (!userId) return;
 
-        fetch(`${config.BACKEND_BASE_URL}/experiment_api/experiment/get_result/?subject_id=${userId}`)
+        fetch(`${config.BACKEND_BASE_URL}/experiment_api/experiment/result/?subject_id=${userId}`)
             .then(res => res.json())
             .then(data => {
                 setGroupedResults(data);
@@ -38,7 +38,7 @@ export default function ResultPage() {
             });
     }, [userId]);
 
-    const groupTypes = [0, 1, 2, 3];
+    const groupTypes = ['A', 'B', 'C', 'D'];
 
     return (
         <div className={styles.resultContainer} style={{ paddingTop: '12vh' }}>
@@ -65,18 +65,19 @@ export default function ResultPage() {
             </button>
 
             {groupTypes.map((type) => {
-                const group = groupedResults.find(g => g.type === type);
+                const group = groupedResults.find(g => g.type.toString() === type);
                 const items = group ? group.items : [];
+                console.log();
                 return (
                     <div key={type} className={styles.groupCard}>
-                        <div className={styles.groupTitle}>{groupsMap[type]}</div>
+                        <div className={styles.groupTitle}>{groupsMap[type.charCodeAt(0) - 'A'.charCodeAt(0)]}</div>
                         <div className={styles.groupContent}>
                             <div className={styles.groupLabel}>你选择购买了以下商品：</div>
                             <div className={styles.productGrid}>
                                 {items.map((id, i) => (
                                     <div key={i} className={styles.productItem}>
                                         <img
-                                            src={`${config.BACKEND_BASE_URL}/media/images/id-${id}.jpg`}
+                                            src={`${config.BACKEND_BASE_URL}/media/images/${id}-1.jpg`}
                                             alt={`商品${id}`}
                                             className={styles.productImage}
                                         />

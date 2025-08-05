@@ -32,15 +32,15 @@ Information about one product is listed as follows.
 | `original_price`   | `float`        | Original price                     |
 | `live_price`       | `float`        | Live-stream price                  |
 | `price_comparison` | `string`       | Price comparison description       |
-| `discount_info`    | `string`       | Discount information               |
+| `sales_volume`     | `string`       | Sales volume (e.g., "12k+")        |
 | `sizes`            | `string`       | Size information                   |
-| `material`         | `string`       | Material description               |
-| `style`            | `string`       | Style                              |
 | `colors`           | `string`       | Color information                  |
 | `features`         | `string`       | Product features                   |
+| `positive_keywords`| `list[string]` | Positive keywords                  |
+| `negative_keywords`| `list[string]` | Negative keywords                  |
+| `real_review`      | `string`       | Real review                        |
 | `sales_rating`     | `float`        | Sales rating                       |
 | `shipping_time`    | `string`       | Estimated shipping time            |
-| `sales_volume`     | `string`       | Sales volume (e.g., "12k+")        |
 | `reviews_count`    | `string`       | Review count (e.g., "231 reviews") |
 | `shipping_info`    | `list[string]` | Shipping-related information       |
 | `return_policy`    | `list[string]` | Return policy                      |
