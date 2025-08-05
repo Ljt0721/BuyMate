@@ -132,9 +132,9 @@ def get_audio(request):
     if not text:
         return JsonResponse({'success': False, 'error': 'Missing text parameter'}, status=400)
 
-    timestamp = time.time()
+    timestamp = int(time.time())
     filename = f'audio_output_{timestamp}.mp3'
-    filepath = os.path.join('../media/audios', filename)
+    filepath = os.path.join('..', 'media', 'audios', filename)
 
     save_to_mp3(text, filepath)
 

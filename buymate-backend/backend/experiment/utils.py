@@ -1,8 +1,7 @@
 import asyncio
 import edge_tts
 
-def save_to_mp3(text, time):
-    filename = f"{time}-output.mp3"
+def save_to_mp3(text, filepath):
 
     async def _run():
         communicate = edge_tts.Communicate(
@@ -10,6 +9,6 @@ def save_to_mp3(text, time):
             voice="zh-CN-XiaoxiaoNeural",
             rate="+0%"
         )
-        await communicate.save(filename)
+        await communicate.save(filepath)
 
     asyncio.run(_run())
