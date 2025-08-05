@@ -1,135 +1,7 @@
 [
+  
   {
     "id": "1-1",
-    "name": "HEYOUNGIRL沙丘废土风荷叶边套装",
-    "brand": "HEYOUNGIRL",
-    "price": {
-      "current": 57.23,
-      "original": 59,
-      "live_price": 59,
-      "price_comparison": "直播持平"
-    },
-    "sales_volume": "已售600+",
-    "rating": 4.6,
-    "reviews_count": "100+",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "features": [
-      "两件套",
-      "不规则裙",
-      "长袖",
-      "A型廓形"
-    ],
-    "positive_keywords": [
-      "好看",
-      "很舒服"
-    ],
-    "negative_keywords": [
-      "少一根带子"
-    ],
-    "real_review": "好看！！很舒服 —— @t**8 2025年6月8日",
-    "shipping_info": [
-      "48小时内发货",
-      "广东广州发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款",
-      "退货包运费"
-    ]
-  },
-  {
-    "id": "1-2",
-    "name": "MSYOUCAN蝴蝶收藏家拼贴肌理褶皱罩衫",
-    "brand": "MSYOUCAN",
-    "price": {
-      "current": 52.25,
-      "original": 55,
-      "live_price": 29.9,
-      "price_comparison": "直播优惠75%"
-    },
-    "sales_volume": "已售1000+",
-    "rating": 4.7,
-    "reviews_count": "100+",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "colors": [
-      "棕色"
-    ],
-    "features": [
-      "V领",
-      "系带",
-      "褶皱",
-      "蕾丝",
-      "修身型"
-    ],
-    "positive_keywords": [
-      "质量好",
-      "上身效果好",
-      "显身材",
-      "面料舒服",
-      "性价比高"
-    ],
-    "negative_keywords": [],
-    "real_review": "质量不错，搭小绿裙很有春天的感觉 —— @t**9 2025年5月1日",
-    "shipping_info": [
-      "72小时内发货",
-      "浙江杭州发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "1-3",
-    "name": "PP HOME废土风穿搭套装",
-    "brand": "PP HOME",
-    "price": {
-      "current": 26.98,
-      "original": 29.98,
-      "live_price": 59,
-      "price_comparison": "直播溢价118%"
-    },
-    "sales_volume": "已售800+",
-    "rating": 4.6,
-    "reviews_count": "400+",
-    "sizes": [
-      "S",
-      "M",
-      "L"
-    ],
-    "features": [
-      "三件套",
-      "吊带",
-      "半身裙",
-      "开衫",
-      "宽松型"
-    ],
-    "positive_keywords": [
-      "颜值超级好",
-      "价廉物美"
-    ],
-    "negative_keywords": [],
-    "real_review": "巨好看，怎么搭配都好看！ —— @t**4 2025年7月17日",
-    "shipping_info": [
-      "48小时内发货",
-      "江苏南京发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "退货包运费",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "6-1",
     "name": "陌素小姐沙漠连衣裙",
     "brand": "陌素小姐",
     "price": {
@@ -171,7 +43,7 @@
     ]
   },
   {
-    "id": "6-2",
+    "id": "1-2",
     "name": "迪拜沙滩民族风连衣裙",
     "brand": "我的名字好记",
     "price": {
@@ -220,7 +92,7 @@
     ]
   },
   {
-    "id": "6-3",
+    "id": "1-3",
     "name": "波西米亚民族风连衣裙",
     "brand": "无品牌",
     "price": {
@@ -260,7 +132,7 @@
     ]
   },
   {
-    "id": "7-1",
+    "id": "2-1",
     "name": "撞色竖条吊带背心",
     "brand": "无品牌",
     "price": {
@@ -305,7 +177,7 @@
     ]
   },
   {
-    "id": "7-2",
+    "id": "2-2",
     "name": "辣妹风撞色条纹吊带背心",
     "brand": "饰宇",
     "price": {
@@ -349,7 +221,7 @@
     ]
   },
   {
-    "id": "7-3",
+    "id": "2-3",
     "name": "川西废土风连衣裙套装",
     "brand": "妍洛莎",
     "price": {
@@ -385,285 +257,7 @@
     ]
   },
   {
-    "id": "8-1",
-    "name": "韩系木耳边格子无袖衬衫",
-    "brand": "花本茹",
-    "price": {
-      "current": 49.2,
-      "original": 55,
-      "live_price": 49.98,
-      "price_comparison": "直播溢价1.6%"
-    },
-    "sales_volume": "已售200+",
-    "rating": 4.7,
-    "reviews_count": "29",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL"
-    ],
-    "colors": [
-      "蓝色",
-      "藏青色"
-    ],
-    "features": [
-      "通勤风",
-      "宽松",
-      "无袖",
-      "防紫外线",
-      "格子"
-    ],
-    "positive_keywords": [
-      "尺码合适",
-      "显瘦",
-      "面料透气",
-      "款式时尚"
-    ],
-    "negative_keywords": [],
-    "real_review": "超哇塞，面料透气，爱了 —— @玻**天 2025年6月28日",
-    "shipping_info": [
-      "48小时内发货",
-      "广东广州发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款",
-      "假一赔四"
-    ]
-  },
-  {
-    "id": "8-2",
-    "name": "法式格子小飞袖衬衫",
-    "brand": "无品牌",
-    "price": {
-      "current": 49.9,
-      "original": 79,
-      "live_price": 49.98,
-      "price_comparison": "直播持平"
-    },
-    "sales_volume": "已售100+",
-    "rating": 4.4,
-    "reviews_count": "4",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "2XL"
-    ],
-    "colors": [
-      "格子"
-    ],
-    "features": [
-      "通勤风",
-      "宽松",
-      "飞飞袖",
-      "立领",
-      "格子"
-    ],
-    "positive_keywords": [
-      "法式风格",
-      "飞袖特别",
-      "经典格子"
-    ],
-    "negative_keywords": [],
-    "real_review": "法式风格很好看，飞袖设计特别 —— @用户匿名",
-    "shipping_info": [
-      "平均2天内发货",
-      "江苏苏州发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "8-3",
-    "name": "韩版时尚百搭无袖格子衬衫",
-    "brand": "Tagkita/她及其他",
-    "price": {
-      "current": 76.5,
-      "original": 85,
-      "live_price": 49.98,
-      "price_comparison": "直播优惠-35%"
-    },
-    "sales_volume": "已售200+",
-    "rating": 4.0,
-    "reviews_count": "36",
-    "sizes": [
-      "M",
-      "L"
-    ],
-    "colors": [
-      "蓝色格子",
-      "黑色格子"
-    ],
-    "features": [
-      "通勤风",
-      "韩版",
-      "宽松",
-      "防紫外线"
-    ],
-    "positive_keywords": [
-      "韩版设计",
-      "显瘦"
-    ],
-    "negative_keywords": [
-      "质量一般",
-      "纠纷率高"
-    ],
-    "real_review": "韩版设计比较时尚，但质量一般，需注意售后 —— @用户匿名",
-    "shipping_info": [
-      "平均2天内发货",
-      "广东深圳发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "10-1",
-    "name": "复古度假风镂空钩花罩衫叠穿吊带连衣裙",
-    "brand": "可可里小姐",
-    "price": {
-      "current": 52.98,
-      "original": 79.9,
-      "live_price": 105,
-      "price_comparison": "直播溢价98%"
-    },
-    "sales_volume": "已售700+",
-    "rating": 4.5,
-    "reviews_count": "200+",
-    "sizes": [
-      "均码"
-    ],
-    "colors": [
-      "吊带裙",
-      "罩衫",
-      "两件套",
-      "吊带裙无腰带"
-    ],
-    "features": [
-      "两件套",
-      "镂空罩衫",
-      "吊带裙",
-      "度假风"
-    ],
-    "positive_keywords": [
-      "可叠穿",
-      "罩衫实用",
-      "美得很"
-    ],
-    "negative_keywords": [],
-    "real_review": "还能搭自己衣服，罩衫不错，美得很 —— @k**0 2025年4月22日",
-    "shipping_info": [
-      "48小时内发货",
-      "河北石家庄发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "10-2",
-    "name": "波西米亚水墨扎染吊带裙",
-    "brand": "陌素小姐",
-    "price": {
-      "current": 71.9,
-      "original": 79.9,
-      "live_price": 105,
-      "price_comparison": "直播溢价46%"
-    },
-    "sales_volume": "已售1000+",
-    "rating": 4.9,
-    "reviews_count": "100+",
-    "sizes": [
-      "均码"
-    ],
-    "colors": [
-      "蓝色水墨扎染裙",
-      "白色针织马甲",
-      "绣花纹饰腰带",
-      "米色针织马甲",
-      "花朵女孩盆帽",
-      "米色复古框眼镜"
-    ],
-    "features": [
-      "吊带裙",
-      "扎染工艺",
-      "叠穿",
-      "度假风"
-    ],
-    "positive_keywords": [
-      "超美丽",
-      "质感好",
-      "搭配好看"
-    ],
-    "negative_keywords": [
-      "第一次洗会掉色"
-    ],
-    "real_review": "超美丽，质感也很好，注意第一次洗会掉色 —— @z**8 2025年6月9日",
-    "shipping_info": [
-      "48小时内发货",
-      "河北石家庄发货"
-    ],
-    "return_policy": [
-      "15天价保",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "10-3",
-    "name": "度假风流苏罩衫叠穿吊带连衣裙套装",
-    "brand": "可乐也可口",
-    "price": {
-      "current": 33.28,
-      "original": 36.98,
-      "live_price": 105,
-      "price_comparison": "直播溢价216%"
-    },
-    "sales_volume": "已售1000+",
-    "rating": 4.6,
-    "reviews_count": "1000+",
-    "sizes": [
-      "S",
-      "M",
-      "L",
-      "XL",
-      "XXL"
-    ],
-    "colors": [
-      "连衣裙+罩衫两件套",
-      "流苏罩衫单件",
-      "孔雀蓝连衣裙单件"
-    ],
-    "features": [
-      "两件套",
-      "流苏罩衫",
-      "吊带裙",
-      "度假风"
-    ],
-    "positive_keywords": [
-      "料子厚实",
-      "版型大方",
-      "穿着舒服"
-    ],
-    "negative_keywords": [],
-    "real_review": "简洁大方的一条裙子，穿着舒服 —— @一**啊 2025年6月25日",
-    "shipping_info": [
-      "预计3天内发货",
-      "成都发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "11-1",
+    "id": "3-1",
     "name": "大码法式波点衬衫女夏季设计感短袖上衣",
     "brand": "叽咕叽咕家大码女装",
     "price": {
@@ -711,7 +305,7 @@
     ]
   },
   {
-    "id": "11-2",
+    "id": "3-2",
     "name": "巨鹿工作室甜辣一字肩波点短袖牛仔裤套装",
     "brand": "JULULOOK",
     "price": {
@@ -758,7 +352,7 @@
     ]
   },
   {
-    "id": "11-3",
+    "id": "3-3",
     "name": "甜辣风复古格子一字领短袖T恤",
     "brand": "kumikumi",
     "price": {
@@ -802,7 +396,7 @@
     ]
   },
   {
-    "id": "12-1",
+    "id": "4-1",
     "name": "韩系宽松卡通KT猫印花长袖T恤",
     "brand": "青岛泽靖韩系档口",
     "price": {
@@ -842,7 +436,7 @@
     ]
   },
   {
-    "id": "12-2",
+    "id": "4-2",
     "name": "韩系卡通印花漏肩长袖T恤",
     "brand": "小萌家韩国女装",
     "price": {
@@ -887,7 +481,7 @@
     ]
   },
   {
-    "id": "12-3",
+    "id": "4-3",
     "name": "趣味卡通KT猫印花宽松长袖T恤",
     "brand": "青岛泽靖韩系档口",
     "price": {
@@ -927,7 +521,7 @@
     ]
   },
   {
-    "id": "13-1",
+    "id": "5-1",
     "name": "莫代尔V领短袖T恤女夏季薄款宽松上衣",
     "brand": "韩都一色",
     "price": {
@@ -981,7 +575,7 @@
     ]
   },
   {
-    "id": "13-2",
+    "id": "5-2",
     "name": "正肩U领短袖T恤女夏季修身短款上衣",
     "brand": "EIGHTHMONTH",
     "price": {
@@ -1028,7 +622,7 @@
     ]
   },
   {
-    "id": "13-3",
+    "id": "5-3",
     "name": "莫代尔V领短袖T恤女夏季薄款宽松纯色上衣",
     "brand": "八七美衣",
     "price": {
@@ -1079,8 +673,10 @@
       "极速退款"
     ]
   },
+
+
   {
-    "id": "2-1",
+    "id": "8-1",
     "name": "AKF唇泥唇霜唇釉",
     "brand": "AKF",
     "price": {
@@ -1138,7 +734,7 @@
     ]
   },
   {
-    "id": "2-2",
+    "id": "8-2",
     "name": "ROZO柔焦雾感唇泥",
     "brand": "ROZO",
     "price": {
@@ -1180,7 +776,7 @@
     ]
   },
   {
-    "id": "2-3",
+    "id": "8-3",
     "name": "植萃盈亮润唇油",
     "brand": "无品牌",
     "price": {
@@ -1219,7 +815,7 @@
     ]
   },
   {
-    "id": "3-1",
+    "id": "9-1",
     "name": "juduo橘朵眼影盘玩趣七色",
     "brand": "JudydoLL/橘朵",
     "price": {
@@ -1263,7 +859,7 @@
     ]
   },
   {
-    "id": "3-2",
+    "id": "9-2",
     "name": "AKF眼影盘七色2025新款",
     "brand": "AKF",
     "price": {
@@ -1305,7 +901,7 @@
     ]
   },
   {
-    "id": "3-3",
+    "id": "9-3",
     "name": "JUDYDOLL橘朵玩趣七色眼影盘",
     "brand": "JudydoLL/橘朵",
     "price": {
@@ -1349,7 +945,7 @@
     ]
   },
   {
-    "id": "4-1",
+    "id": "10-1",
     "name": "VEECCI唯资自动旋转眼线胶笔",
     "brand": "VEECCI/唯资",
     "price": {
@@ -1393,7 +989,7 @@
     ]
   },
   {
-    "id": "4-2",
+    "id": "10-2",
     "name": "VEECCI唯资自动旋转双头眉笔",
     "brand": "VEECCI/唯资",
     "price": {
@@ -1435,7 +1031,7 @@
     ]
   },
   {
-    "id": "4-3",
+    "id": "10-3",
     "name": "veecci唯资眼线液笔胶笔棕色",
     "brand": "VEECCI/唯资",
     "price": {
@@ -1479,7 +1075,7 @@
     ]
   },
   {
-    "id": "5-1",
+    "id": "11-1",
     "name": "雪里里24排免胶自粘太阳花睫毛书",
     "brand": "雪里里",
     "price": {
@@ -1515,7 +1111,7 @@
     ]
   },
   {
-    "id": "5-2",
+    "id": "11-2",
     "name": "OEIEZ欧亿姿山茶花假睫毛",
     "brand": "OEIEZ/欧亿姿",
     "price": {
@@ -1551,7 +1147,7 @@
     ]
   },
   {
-    "id": "5-3",
+    "id": "11-3",
     "name": "ZNK清透狐系苏妲己假睫毛",
     "brand": "ZNK（美妆）",
     "price": {
@@ -1587,7 +1183,7 @@
     ]
   },
   {
-    "id": "9-1",
+    "id": "12-1",
     "name": "珂曼精华唇蜜",
     "brand": "caremille/珂曼",
     "price": {
@@ -1627,7 +1223,7 @@
     ]
   },
   {
-    "id": "9-2",
+    "id": "12-2",
     "name": "法国灰太太珂曼精华唇蜜",
     "brand": "caremille/珂曼",
     "price": {
@@ -1667,7 +1263,7 @@
     ]
   },
   {
-    "id": "9-3",
+    "id": "12-3",
     "name": "李佳琪推荐持久水润玻璃嘟嘟唇润唇油",
     "brand": "无品牌",
     "price": {
@@ -1709,130 +1305,7 @@
     ]
   },
   {
-    "id": "14-1",
-    "name": "丝绨遮瑕膏遮盖黑眼圈痘印斑点",
-    "brand": "CIDE/丝绨",
-    "price": {
-      "current": 45.8,
-      "original": 45.8,
-      "live_price": 169,
-      "price_comparison": "直播溢价269%"
-    },
-    "sales_volume": "已售1万+",
-    "rating": 4.7,
-    "reviews_count": "5000+",
-    "colors": [
-      "130浅米色",
-      "140自然色",
-      "141中肤色",
-      "151深肤色",
-      "152深色",
-      "153巧克力色",
-      "181白色"
-    ],
-    "features": [
-      "遮瑕",
-      "提亮肤色",
-      "遮盖斑点",
-      "不干皮"
-    ],
-    "positive_keywords": [
-      "遮瑕效果强",
-      "性价比高",
-      "不卡粉"
-    ],
-    "negative_keywords": [
-      "个别色号偏干"
-    ],
-    "real_review": "遮瑕效果厉害，发货快 —— @梦**空 2025年6月23日",
-    "shipping_info": [
-      "48小时内发货",
-      "广东东莞发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "14-2",
-    "name": "ZFC吉祥色彩虫草粉底膏试色小样",
-    "brand": "ZFC",
-    "price": {
-      "current": 9.5,
-      "original": 9.5,
-      "live_price": 169,
-      "price_comparison": "直播溢价1678%"
-    },
-    "sales_volume": "已售100+",
-    "rating": 4.6,
-    "reviews_count": "48",
-    "colors": [
-      "01象牙白",
-      "02自然色",
-      "03深肤色"
-    ],
-    "features": [
-      "试色小样",
-      "虫草养肤",
-      "便携"
-    ],
-    "positive_keywords": [
-      "试色方便",
-      "包装小巧"
-    ],
-    "negative_keywords": [
-      "正装偏贵"
-    ],
-    "real_review": "还好买的小样，正装可能不适合 —— @云**e 2025年7月20日",
-    "shipping_info": [
-      "48小时内发货",
-      "成都发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款"
-    ]
-  },
-  {
-    "id": "14-3",
-    "name": "吉祥色彩虫草奢润粉底膏",
-    "brand": "吉祥色彩",
-    "price": {
-      "current": 239,
-      "original": 279,
-      "live_price": 169,
-      "price_comparison": "直播优惠-29%"
-    },
-    "sales_volume": "已售12",
-    "rating": 5.0,
-    "reviews_count": "暂无评价",
-    "colors": [
-      "象牙白",
-      "自然色",
-      "深肤色"
-    ],
-    "features": [
-      "粉底膏",
-      "虫草养肤",
-      "遮瑕保湿",
-      "控油"
-    ],
-    "positive_keywords": [],
-    "negative_keywords": [],
-    "real_review": "暂时还没有评价呢~",
-    "shipping_info": [
-      "48小时内发货",
-      "成都发货"
-    ],
-    "return_policy": [
-      "7天无理由退货",
-      "极速退款",
-      "假一赔四"
-    ]
-  },
-  {
-    "id": "15-1",
+    "id": "13-1",
     "name": "泊本6D玻尿酸保湿修护水乳套装",
     "brand": "泊本",
     "price": {
@@ -1873,7 +1346,7 @@
     ]
   },
   {
-    "id": "15-2",
+    "id": "13-2",
     "name": "泊本6D玻尿酸水乳护肤套装小样",
     "brand": "泊本",
     "price": {
@@ -1910,7 +1383,7 @@
     ]
   },
   {
-    "id": "15-3",
+    "id": "13-3",
     "name": "泊本姜黄素控油修护水乳套装",
     "brand": "泊本",
     "price": {
@@ -1951,7 +1424,7 @@
     ]
   },
   {
-    "id": "16-1",
+    "id": "14-1",
     "name": "POLAN珀澜日不落持妆粉底液",
     "brand": "珀澜",
     "price": {
@@ -1990,7 +1463,7 @@
     ]
   },
   {
-    "id": "16-2",
+    "id": "14-2",
     "name": "珀澜哑光防水粉底液",
     "brand": "OTHERS",
     "price": {
@@ -2028,7 +1501,7 @@
     ]
   },
   {
-    "id": "16-3",
+    "id": "14-3",
     "name": "UKISS微雾锁妆粉底液",
     "brand": "UKISS/悠珂思",
     "price": {
