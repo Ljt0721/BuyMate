@@ -34,6 +34,11 @@ interface Product {
     real_review: string;
 }
 
+interface TimestampedText {
+    time: number; // 时间戳（秒）
+    content: string; // 文字内容
+}
+
 export default function ExperimentPage() {
     const nav = useNavigate();
     const userId = sessionStorage.getItem('exp:userId');
@@ -54,6 +59,7 @@ export default function ExperimentPage() {
     const [aiResponse, setAiResponse] = useState<string | null>(null);
     const [resourcesLoaded, setResourcesLoaded] = useState(false); // 新增状态：资源是否加载完成
     const [videoPlaying, setVideoPlaying] = useState(false); // 新增状态：视频是否开始播放
+    const [timestampedTexts, setTimestampedTexts] = useState<TimestampedText[]>([]);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     /* ---------- 计时器 ---------- */
@@ -92,10 +98,31 @@ export default function ExperimentPage() {
         }
     };
 
-    const getAiTranslation = async () => {
+    const fetchTimestampedTexts = async () => {
+        try {
+            const response = await fetch(`${config.BACKEND_BASE_URL}/media/json/${expId}.json`);
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const data = await response.json();
+            setTimestampedTexts(data);
+        } catch (error) {
+            console.error('Failed to fetch timestamped texts:', error);
+        }
+    };
+
+    useEffect(() => {
+        setStartTs(null);
+        setTimestampedTexts([]);
+        fetchTimestampedTexts();
+    }, [expId]);
+
+    const getAiTranslation = async (text: string) => {
         try {
             const response = await fetch(
-                `${config.BACKEND_BASE_URL}/experiment_api/experiment/ai_translation/?text=Hello%20World`
+                `${config.BACKEND_BASE_URL}/experiment_api/experiment/ai_translation/?text=${encodeURIComponent(text)}`
             );
 
             if (!response.ok) {
@@ -113,40 +140,20 @@ export default function ExperimentPage() {
         }
     };
 
-    const getAudio = async () => {
-        try {
-            const response = await fetch(
-                `${config.BACKEND_BASE_URL}/experiment_api/experiment/get_audio/?text=Hello%20World`
-            );
-
-            if (!response.ok) {
-                throw new Error(`HTTP error! status: ${response.status}`);
-            }
-
-            const blob = await response.blob();
-            const audioUrl = URL.createObjectURL(blob);
-            const audio = new Audio(audioUrl);
-            audio.play();
-        } catch (error) {
-            console.error('Error getting audio:', error);
-        }
-    };
-
     useEffect(() => {
-        if (group === 'C' || group === 'D') {
-            setAiResponse(null); // 重置AI响应
-        }
-    }, [expId, group]);
+        if (startTs && timestampedTexts.length > 0) {
+            const interval = setInterval(() => {
+                const currentTime = (Date.now() - startTs) / 1000; // 当前时间（秒）
+                const nextText = timestampedTexts.find((t) => t.time <= currentTime + 4.6 && t.time >= currentTime + 3.4);
 
-    useEffect(() => {
-        if (resourcesLoaded && videoPlaying) {
-            if (group === 'C') {
-                getAiTranslation();
-            } else if (group === 'D') {
-                getAudio();
-            }
+                if (nextText) {
+                    getAiTranslation(nextText.content);
+                }
+            }, 1000); // 每秒检查一次
+
+            return () => clearInterval(interval);
         }
-    }, [resourcesLoaded, videoPlaying, group]);
+    }, [startTs, timestampedTexts]);
 
     /* ---------- 资源加载完成检测 ---------- */
     useEffect(() => {
@@ -282,7 +289,7 @@ export default function ExperimentPage() {
                 position: 'relative',
             }}
         >
-            {/* ---------- 顶部 ---------- */}
+            {/* 顶部 */}
             <header
                 style={{
                     position: 'absolute',
@@ -302,14 +309,14 @@ export default function ExperimentPage() {
                         color: '#3d9712',
                         border: '0.2vmin solid #3d9712',
                         borderRadius: '1.2vmin',
-                        fontSize: 'clamp(3vw, 3vw, 3vw)'
+                        fontSize: 'clamp(3vw, 3vw, 3vw)',
                     }}
                 >
                     {group}组：{GROUP_DESC[group]}
                 </span>
             </header>
 
-            {/* ---------- 主体 ---------- */}
+            {/* 主体 */}
             <main
                 style={{
                     flex: 1,
@@ -399,7 +406,7 @@ export default function ExperimentPage() {
                     </div>
                 </aside>
 
-                {/* ---------- 手机 + 视频 ---------- */}
+                {/* 手机 + 视频 */}
                 <div
                     style={{
                         position: 'absolute',
@@ -495,7 +502,7 @@ export default function ExperimentPage() {
                             gap: '0.5vw',
                         }}
                     >
-                        {group === 'D'? (
+                        {group === 'D' ? (
                             <img
                                 src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
                                 alt="star"
@@ -504,8 +511,8 @@ export default function ExperimentPage() {
                                     height: '4vw',
                                 }}
                             />
-                            ): null}
-                        {group === 'C'? (
+                        ) : null}
+                        {group === 'C' ? (
                             <img
                                 src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
                                 alt="star"
@@ -515,13 +522,13 @@ export default function ExperimentPage() {
                                     height: '4vw',
                                 }}
                             />
-                        ): null}
+                        ) : null}
                         {group === 'C' && videoPlaying ? (
-
                             <div
                                 style={{
                                     width: '19vw',
-                                    height: '2vw',
+                                    height: 'auto',
+                                    minHeight: '2vw',
                                     backgroundColor: 'rgba(128, 128, 128, 0.6)', // 半透明灰色
                                     borderRadius: '1vmin',
                                     padding: '1vmin',
@@ -529,6 +536,7 @@ export default function ExperimentPage() {
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
+                                    fontSize: '1vw',
                                 }}
                             >
                                 {aiResponse || '聆听中...'}
@@ -538,7 +546,7 @@ export default function ExperimentPage() {
                 ) : null}
             </main>
 
-            {/* ---------- 右下角按钮 ---------- */}
+            {/* 右下角按钮 */}
             <footer
                 style={{
                     position: 'absolute',
@@ -581,7 +589,7 @@ export default function ExperimentPage() {
                 </button>
             </footer>
 
-            {/* ---------- 相似商品列表 ---------- */}
+            {/* 相似商品列表 */}
             {resourcesLoaded && showSimilarProducts && similarProducts.length > 0 && (
                 <div
                     style={{
@@ -596,7 +604,7 @@ export default function ExperimentPage() {
                         padding: '1vmin',
                         borderRadius: '0.5vmin',
                         boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)',
-                        overflow: 'hidden', // Hide the scrollbar
+                        overflow: 'hidden', // 隐藏滚动条
                     }}
                 >
                     <div
@@ -623,7 +631,7 @@ export default function ExperimentPage() {
                             <div
                                 key={product.id}
                                 style={{
-                                    width: '8vw', // Adjusted width
+                                    width: '8vw', // 调整宽度
                                     minWidth: '8vw',
                                     backgroundColor: '#fff',
                                     borderRadius: '0.8vmin',
@@ -631,7 +639,7 @@ export default function ExperimentPage() {
                                     overflow: 'hidden',
                                     display: 'flex',
                                     flexDirection: 'column',
-                                    fontSize: '1.2vmin', // Adjusted font size
+                                    fontSize: '1.2vmin', // 调整字体大小
                                     scrollSnapAlign: 'start',
                                 }}
                             >
