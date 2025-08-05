@@ -132,106 +132,127 @@ export default function PostQuestionnaire() {
 
 
     return (
-        <div className={styles.page}>
-            <h1>后测量表</h1>
+        <div>
+            <div style={{ padding: '2vh 0 0 2vw' }}>
+                <button
+                    style={{
+                        width: '5vw',
+                        height: '5vw',
+                        borderRadius: '50%',
+                        border: '0.1vw solid #07C160',
+                        background: '#fff',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => nav('/')}
+                >
+                    <img
+                        src={`${config.BACKEND_BASE_URL}/media/images/back.png`}
+                        alt="back"
+                        style={{ width: '2vw', height: '2vw', pointerEvents: 'none' }}
+                    />
+                </button>
+            </div>
+            <div className={styles.page}>
+                <h1>后测量表</h1>
 
-            <section>
-                <h2>一，IBS 量表</h2>
-                {ibsQuestions.map((q, i) => {
-                    const [leftWord, rightWord] = ["不同意", "同意"];
-                    return (
-                        <div key={i} className={styles.questionRow}>
-                            <div>{q}</div>
-                            <div className={styles.selectRow}>
-                                <span className={styles.selectLabel}>{leftWord}</span>
-                                <div className={styles.scale}>
-                                    {[1, 2, 3, 4, 5, 6, 7].map(n => (
-                                        <button
-                                            key={n}
-                                            className={ibsAnswers[i] === n ? styles.selected : ''}
-                                            onClick={() => updateIbsAnswer(i, n)}
-                                        >
-                                            {""}
-                                        </button>
-                                    ))}
+                <section>
+                    <h2>一，IBS 量表</h2>
+                    {ibsQuestions.map((q, i) => {
+                        const [leftWord, rightWord] = ["不同意", "同意"];
+                        return (
+                            <div key={i} className={styles.questionRow}>
+                                <div>{q}</div>
+                                <div className={styles.selectRow}>
+                                    <span className={styles.selectLabel}>{leftWord}</span>
+                                    <div className={styles.scale}>
+                                        {[1, 2, 3, 4, 5, 6, 7].map(n => (
+                                            <button
+                                                key={n}
+                                                className={ibsAnswers[i] === n ? styles.selected : ''}
+                                                onClick={() => updateIbsAnswer(i, n)}
+                                            >
+                                                {""}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <span className={styles.selectLabel}>{rightWord}</span>
                                 </div>
-                                <span className={styles.selectLabel}>{rightWord}</span>
                             </div>
-                        </div>
-                    );
-                })}
-            </section>
+                        );
+                    })}
+                </section>
 
-            <section>
-                <h2>二，系统接受度与用户满意度量表</h2>
-                {acceptabilityQuestions.map((q, i) => {
-                    const [leftWord, rightWord] = ["不同意", "同意"];
-                    return (
-                        <div key={i} className={styles.questionRow}>
-                            <div>{q}</div>
-                            <div className={styles.selectRow}>
-                                <span className={styles.selectLabel}>{leftWord}</span>
-                                <div className={styles.scale}>
-                                    {[1, 2, 3, 4, 5].map(n => (
-                                        <button
-                                            key={n}
-                                            className={accept[i] === n ? styles.selected : ''}
-                                            onClick={() => updateAcceptAnswer(i, n)}
-                                        >
-                                            {""}
-                                        </button>
-                                    ))}
+                <section>
+                    <h2>二，系统接受度与用户满意度量表</h2>
+                    {acceptabilityQuestions.map((q, i) => {
+                        const [leftWord, rightWord] = ["不同意", "同意"];
+                        return (
+                            <div key={i} className={styles.questionRow}>
+                                <div>{q}</div>
+                                <div className={styles.selectRow}>
+                                    <span className={styles.selectLabel}>{leftWord}</span>
+                                    <div className={styles.scale}>
+                                        {[1, 2, 3, 4, 5].map(n => (
+                                            <button
+                                                key={n}
+                                                className={accept[i] === n ? styles.selected : ''}
+                                                onClick={() => updateAcceptAnswer(i, n)}
+                                            >
+                                                {""}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <span className={styles.selectLabel}>{rightWord}</span>
                                 </div>
-                                <span className={styles.selectLabel}>{rightWord}</span>
                             </div>
-                        </div>
-                    );
-                })}
-            </section>
+                        );
+                    })}
+                </section>
 
-            <section>
-                <h2>三，UEQ 量表</h2>
-                <p className={styles.description}>
-                    请告诉我们你的看法。
-                    <br />
-                    请填写以下问卷来评价该产品。问卷由 26 对语义相反的形容词组成，每组词分别描述产品的某方面属性。每对反义词之间划分为 7 个评分等级，每个等级由一个圆圈表示。请根据产品与形容词的相符程度评判该产品，在你认为最适合表达你的主观感受的圆圈处打勾。
-                    <br /><br />
-                    例如：吸引人的 ○ √ ○ ○ ○ ○ ○ 无吸引力的
-                    <br />
-                    在此圆圈处打勾代表你倾向认为该产品有较大吸引力。
-                    <br /><br />
-                    请尽量凭直觉回答，不必过多考虑。这样才能最有效地告诉我们你的第一印象。
-                    <br />
-                    有时你可能对某一项的评价不完全确定，或者觉得两个形容词都不太适合用来描述该产品，即使出现这些情况也请务必选择一个选项。答案并无对错之分。我们关心的是你的个人看法！
-                </p>
-                {ueqQuestions.map((q, i) => {
-                    const [leftWord, rightWord] = q;
-                    return (
-                        <div key={i} className={styles.questionRow}>
-                            <div className={styles.selectRow}>
-                                <span className={styles.selectLabel}>{leftWord}</span>
-                                <div className={styles.scale}>
-                                    {[1, 2, 3, 4, 5, 6, 7].map(n => (
-                                        <button
-                                            key={n}
-                                            className={ueq[i] === n ? styles.selected : ''}
-                                            onClick={() => updateUeqAnswer(i, n)}
-                                        >
-                                            {""}
-                                        </button>
-                                    ))}
+                <section>
+                    <h2>三，UEQ 量表</h2>
+                    <p className={styles.description}>
+                        请告诉我们你的看法。
+                        <br />
+                        请填写以下问卷来评价该产品。问卷由 26 对语义相反的形容词组成，每组词分别描述产品的某方面属性。每对反义词之间划分为 7 个评分等级，每个等级由一个圆圈表示。请根据产品与形容词的相符程度评判该产品，在你认为最适合表达你的主观感受的圆圈处打勾。
+                        <br /><br />
+                        例如：吸引人的 ○ √ ○ ○ ○ ○ ○ 无吸引力的
+                        <br />
+                        在此圆圈处打勾代表你倾向认为该产品有较大吸引力。
+                        <br /><br />
+                        请尽量凭直觉回答，不必过多考虑。这样才能最有效地告诉我们你的第一印象。
+                        <br />
+                        有时你可能对某一项的评价不完全确定，或者觉得两个形容词都不太适合用来描述该产品，即使出现这些情况也请务必选择一个选项。答案并无对错之分。我们关心的是你的个人看法！
+                    </p>
+                    {ueqQuestions.map((q, i) => {
+                        const [leftWord, rightWord] = q;
+                        return (
+                            <div key={i} className={styles.questionRow}>
+                                <div className={styles.selectRow}>
+                                    <span className={styles.selectLabel}>{leftWord}</span>
+                                    <div className={styles.scale}>
+                                        {[1, 2, 3, 4, 5, 6, 7].map(n => (
+                                            <button
+                                                key={n}
+                                                className={ueq[i] === n ? styles.selected : ''}
+                                                onClick={() => updateUeqAnswer(i, n)}
+                                            >
+                                                {""}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <span className={styles.selectLabel}>{rightWord}</span>
                                 </div>
-                                <span className={styles.selectLabel}>{rightWord}</span>
                             </div>
-                        </div>
-                    );
-                })}
+                        );
+                    })}
 
-            </section>
+                </section>
 
-            <button className={styles.submitBtn} onClick={finish}>
-                提交
-            </button>
+                <button className={styles.submitBtn} onClick={finish}>
+                    提交
+                </button>
+            </div>
         </div>
     );
 }

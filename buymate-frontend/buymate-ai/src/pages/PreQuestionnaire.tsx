@@ -98,88 +98,109 @@ export default function PreQuestionnaire() {
     };
 
     return (
-        <div className={styles.page}>
-            <h1>前测问卷</h1>
+        <div>
+            <div style={{ padding: '2vh 0 0 2vw' }}>
+                <button
+                    style={{
+                        width: '5vw',
+                        height: '5vw',
+                        borderRadius: '50%',
+                        border: '0.1vw solid #07C160',
+                        background: '#fff',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => nav('/')}
+                >
+                    <img
+                        src={`${config.BACKEND_BASE_URL}/media/images/back.png`}
+                        alt="back"
+                        style={{ width: '2vw', height: '2vw', pointerEvents: 'none' }}
+                    />
+                </button>
+            </div>
+            <div className={styles.page}>
+                <h1>前测问卷</h1>
 
-            <section>
-                <h2>人口学信息</h2>
+                <section>
+                    <h2>人口学信息</h2>
 
-                <label>年龄</label>
-                <select value={age} onChange={e => setAge(e.target.value)}>
-                    <option value="">请选择</option>
-                    {ageOptions.map(opt => <option key={opt}>{opt}</option>)}
-                </select>
+                    <label>年龄</label>
+                    <select value={age} onChange={e => setAge(e.target.value)}>
+                        <option value="">请选择</option>
+                        {ageOptions.map(opt => <option key={opt}>{opt}</option>)}
+                    </select>
 
-                <label>性别</label>
-                <select value={gender} onChange={e => setGender(e.target.value)}>
-                    <option value="">请选择</option>
-                    {genderOptions.map(opt => <option key={opt}>{opt}</option>)}
-                </select>
+                    <label>性别</label>
+                    <select value={gender} onChange={e => setGender(e.target.value)}>
+                        <option value="">请选择</option>
+                        {genderOptions.map(opt => <option key={opt}>{opt}</option>)}
+                    </select>
 
-                <label>教育程度</label>
-                <select value={education} onChange={e => setEducation(e.target.value)}>
-                    <option value="">请选择</option>
-                    {educationOptions.map(opt => <option key={opt}>{opt}</option>)}
-                </select>
+                    <label>教育程度</label>
+                    <select value={education} onChange={e => setEducation(e.target.value)}>
+                        <option value="">请选择</option>
+                        {educationOptions.map(opt => <option key={opt}>{opt}</option>)}
+                    </select>
 
-                <label>月可支配收入</label>
-                <select value={income} onChange={e => setIncome(e.target.value)}>
-                    <option value="">请选择</option>
-                    {incomeOptions.map(opt => <option key={opt}>{opt}</option>)}
-                </select>
+                    <label>月可支配收入</label>
+                    <select value={income} onChange={e => setIncome(e.target.value)}>
+                        <option value="">请选择</option>
+                        {incomeOptions.map(opt => <option key={opt}>{opt}</option>)}
+                    </select>
 
-                <label className={styles.checkboxGroupLabel}>购物渠道偏好</label>
-                <div className={styles.checkboxGroupRow}>
-                    {channelOptions.map(opt => (
-                        <label key={opt} className={styles.checkboxItem}>
-                            <input
-                                type="checkbox"
-                                checked={channels.includes(opt)}
-                                onChange={() => toggleChannel(opt)}
-                            />
-                            {opt}
-                        </label>
-                    ))}
-                </div>
+                    <label className={styles.checkboxGroupLabel}>购物渠道偏好</label>
+                    <div className={styles.checkboxGroupRow}>
+                        {channelOptions.map(opt => (
+                            <label key={opt} className={styles.checkboxItem}>
+                                <input
+                                    type="checkbox"
+                                    checked={channels.includes(opt)}
+                                    onChange={() => toggleChannel(opt)}
+                                />
+                                {opt}
+                            </label>
+                        ))}
+                    </div>
 
 
-                <label>直播购物频率</label>
-                <select value={frequency} onChange={e => setFrequency(e.target.value)}>
-                    <option value="">请选择</option>
-                    {frequencyOptions.map(opt => <option key={opt}>{opt}</option>)}
-                </select>
-            </section>
+                    <label>直播购物频率</label>
+                    <select value={frequency} onChange={e => setFrequency(e.target.value)}>
+                        <option value="">请选择</option>
+                        {frequencyOptions.map(opt => <option key={opt}>{opt}</option>)}
+                    </select>
+                </section>
 
-            <section>
-                <h2>IBS 量表</h2>
-                {ibsQuestions.map((q, i) => {
-                    const [leftWord, rightWord] = ["不同意", "同意"];
-                    return (
-                        <div key={i} className={styles.questionRow}>
-                            <div>{q}</div>
-                            <div className={styles.selectRow}>
-                                <span className={styles.selectLabel}>{leftWord}</span>
-                                <div className={styles.scale}>
-                                    {[1, 2, 3, 4, 5, 6, 7].map(n => (
-                                        <button
-                                            key={n}
-                                            className={ibsAnswers[i] === n ? styles.selected : ''}
-                                            onClick={() => updateIbsAnswer(i, n)}
-                                        >
-                                            {""}
-                                        </button>
-                                    ))}
+                <section>
+                    <h2>IBS 量表</h2>
+                    {ibsQuestions.map((q, i) => {
+                        const [leftWord, rightWord] = ["不同意", "同意"];
+                        return (
+                            <div key={i} className={styles.questionRow}>
+                                <div>{q}</div>
+                                <div className={styles.selectRow}>
+                                    <span className={styles.selectLabel}>{leftWord}</span>
+                                    <div className={styles.scale}>
+                                        {[1, 2, 3, 4, 5, 6, 7].map(n => (
+                                            <button
+                                                key={n}
+                                                className={ibsAnswers[i] === n ? styles.selected : ''}
+                                                onClick={() => updateIbsAnswer(i, n)}
+                                            >
+                                                {""}
+                                            </button>
+                                        ))}
+                                    </div>
+                                    <span className={styles.selectLabel}>{rightWord}</span>
                                 </div>
-                                <span className={styles.selectLabel}>{rightWord}</span>
                             </div>
-                        </div>
-                    );
-                })}
-            </section>
+                        );
+                    })}
+                </section>
 
-            <button className={styles.submitBtn} onClick={finish}>
-                提交
-            </button>
+                <button className={styles.submitBtn} onClick={finish}>
+                    提交
+                </button>
+            </div>
         </div>
     );
 }

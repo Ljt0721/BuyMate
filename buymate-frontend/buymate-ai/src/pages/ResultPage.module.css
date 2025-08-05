@@ -28,8 +28,10 @@
 }
 
 .groupLabel {
-  font-size: 16px;
+  font-size: 20px;
+  font-weight: bold;
   margin: 16px 0 12px 0;
+
 }
 
 .groupContent {

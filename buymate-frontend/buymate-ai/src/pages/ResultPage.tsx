@@ -41,54 +41,53 @@ export default function ResultPage() {
     const groupTypes = ['A', 'B', 'C', 'D'];
 
     return (
-        <div className={styles.resultContainer} style={{ paddingTop: '12vh' }}>
-            <button
-                style={{
-                    position: 'fixed',
-                    top: '2vh',
-                    left: '2vw',
-                    width: '5vw',
-                    height: '5vw',
-                    borderRadius: '50%',
-                    border: '0.1vw solid #07C160',
-                    background: '#fff',
-                    cursor: 'pointer',
-                    zIndex: 1000,
-                }}
-                onClick={() => nav('/')}
-            >
-                <img
-                    src={`${config.BACKEND_BASE_URL}/media/images/back.png`}
-                    alt="back"
-                    style={{ width: '2vw', height: '2vw', pointerEvents: 'none' }}
-                />
-            </button>
-
-            {groupTypes.map((type) => {
-                const group = groupedResults.find(g => g.type.toString() === type);
-                const items = group ? group.items : [];
-                console.log();
-                return (
-                    <div key={type} className={styles.groupCard}>
-                        <div className={styles.groupTitle}>{groupsMap[type.charCodeAt(0) - 'A'.charCodeAt(0)]}</div>
-                        <div className={styles.groupContent}>
-                            <div className={styles.groupLabel}>你选择购买了以下商品：</div>
-                            <div className={styles.productGrid}>
-                                {items.map((id, i) => (
-                                    <div key={i} className={styles.productItem}>
-                                        <img
-                                            src={`${config.BACKEND_BASE_URL}/media/images/${id}-1.jpg`}
-                                            alt={`商品${id}`}
-                                            className={styles.productImage}
-                                        />
-                                        <div className={styles.productName}>{productNames[id - 1] || `商品${id}`}</div>
-                                    </div>
-                                ))}
+        <div>
+            <div style={{ padding: '2vh 0 0 2vw' }}>
+                <button
+                    style={{
+                        width: '5vw',
+                        height: '5vw',
+                        borderRadius: '50%',
+                        border: '0.1vw solid #07C160',
+                        background: '#fff',
+                        cursor: 'pointer',
+                    }}
+                    onClick={() => nav('/')}
+                >
+                    <img
+                        src={`${config.BACKEND_BASE_URL}/media/images/back.png`}
+                        alt="back"
+                        style={{ width: '2vw', height: '2vw', pointerEvents: 'none' }}
+                    />
+                </button>
+            </div>
+            <div className={styles.resultContainer}>
+                {groupTypes.map((type) => {
+                    const group = groupedResults.find(g => g.type.toString() === type);
+                    const items = group ? group.items : [];
+                    console.log();
+                    return (
+                        <div key={type} className={styles.groupCard}>
+                            <div className={styles.groupTitle}>{groupsMap[type.charCodeAt(0) - 'A'.charCodeAt(0)]}</div>
+                            <div className={styles.groupContent}>
+                                <div className={styles.groupLabel}>你选择购买了以下商品：</div>
+                                <div className={styles.productGrid}>
+                                    {items.map((id, i) => (
+                                        <div key={i} className={styles.productItem}>
+                                            <img
+                                                src={`${config.BACKEND_BASE_URL}/media/images/${id}-1.jpg`}
+                                                alt={`商品${id}`}
+                                                className={styles.productImage}
+                                            />
+                                            <div className={styles.productName}>{productNames[id - 1] || `商品${id}`}</div>
+                                        </div>
+                                    ))}
+                                </div>
                             </div>
                         </div>
-                    </div>
-                );
-            })}
+                    );
+                })}
+            </div>
         </div>
     );
 }
