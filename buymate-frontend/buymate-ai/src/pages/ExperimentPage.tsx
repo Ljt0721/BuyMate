@@ -52,6 +52,8 @@ export default function ExperimentPage() {
     const [showSimilarProducts, setShowSimilarProducts] = useState(false);
     const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
     const [aiResponse, setAiResponse] = useState<string | null>(null);
+    const [resourcesLoaded, setResourcesLoaded] = useState(false); // 新增状态：资源是否加载完成
+    const [videoPlaying, setVideoPlaying] = useState(false); // 新增状态：视频是否开始播放
     const videoRef = useRef<HTMLVideoElement>(null);
 
     /* ---------- 计时器 ---------- */
@@ -79,7 +81,7 @@ export default function ExperimentPage() {
             const data = await response.json();
             if (data && data.products && data.products.length > 0) {
                 setSimilarProducts(data.products.slice(0, 3));
-                setShowSimilarProducts(true);
+                setResourcesLoaded(true); // 设置资源加载完成
             } else {
                 console.warn('No products found for experiment_id:', expId);
             }
@@ -93,7 +95,7 @@ export default function ExperimentPage() {
     const getAiTranslation = async () => {
         try {
             const response = await fetch(
-                `${config.BACKEND_BASE_URL}/experiment_api/experiment/get_ai_translation/?text=Hello%20World`
+                `${config.BACKEND_BASE_URL}/experiment_api/experiment/ai_translation/?text=Hello%20World`
             );
 
             if (!response.ok) {
@@ -111,11 +113,78 @@ export default function ExperimentPage() {
         }
     };
 
+    const getAudio = async () => {
+        try {
+            const response = await fetch(
+                `${config.BACKEND_BASE_URL}/experiment_api/experiment/get_audio/?text=Hello%20World`
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const blob = await response.blob();
+            const audioUrl = URL.createObjectURL(blob);
+            const audio = new Audio(audioUrl);
+            audio.play();
+        } catch (error) {
+            console.error('Error getting audio:', error);
+        }
+    };
+
     useEffect(() => {
         if (group === 'C' || group === 'D') {
-            getAiTranslation();
+            setAiResponse(null); // 重置AI响应
         }
-    }, [group]);
+    }, [expId, group]);
+
+    useEffect(() => {
+        if (resourcesLoaded && videoPlaying) {
+            if (group === 'C') {
+                getAiTranslation();
+            } else if (group === 'D') {
+                getAudio();
+            }
+        }
+    }, [resourcesLoaded, videoPlaying, group]);
+
+    /* ---------- 资源加载完成检测 ---------- */
+    useEffect(() => {
+        let videoLoaded = false;
+        let imagesLoaded = 0;
+
+        const checkResourcesLoaded = () => {
+            if (videoLoaded && imagesLoaded >= similarProducts.length) {
+                setResourcesLoaded(true);
+            }
+        };
+
+        if (videoRef.current) {
+            videoRef.current.addEventListener('loadeddata', () => {
+                videoLoaded = true;
+                checkResourcesLoaded();
+            });
+        }
+
+        similarProducts.forEach((product) => {
+            const img = new Image();
+            img.src = `${config.BACKEND_BASE_URL}/media/images/${product.image_id}.jpg`;
+            img.onload = () => {
+                imagesLoaded++;
+                checkResourcesLoaded();
+            };
+            img.onerror = () => {
+                imagesLoaded++;
+                checkResourcesLoaded();
+            };
+        });
+
+        return () => {
+            if (videoRef.current) {
+                videoRef.current.removeEventListener('loadeddata', () => {});
+            }
+        };
+    }, [expId, similarProducts]);
 
     /* ---------- 动作 ---------- */
     const startExp = () => {
@@ -123,6 +192,7 @@ export default function ExperimentPage() {
             videoRef.current.play();
             setStartTs(Date.now());
             setShowSimilarProducts(false);
+            setVideoPlaying(true); // 设置视频开始播放
         }
     };
 
@@ -274,7 +344,9 @@ export default function ExperimentPage() {
                         value={expId}
                         onChange={(e) => {
                             setExpId(Number(e.target.value));
-                            setShowSimilarProducts(false); // Reset similar products when changing experiment ID
+                            setResourcesLoaded(false); // 重置资源加载状态
+                            setShowSimilarProducts(false); // 重置相似商品显示状态
+                            setAiResponse(null); // 重置AI响应
                         }}
                         disabled={isLoading}
                         style={{
@@ -370,12 +442,12 @@ export default function ExperimentPage() {
                             transform: 'translate(-9vh, -3vh)',
                         }}
                     />
-                    {group === 'C' || group === 'D' ? (
+                    {resourcesLoaded && group === 'C' || group === 'D' ? (
                         <button
                             onClick={toggleSimilarProducts}
                             style={{
                                 position: 'absolute',
-                                top: '15%',
+                                top: '20%',
                                 left: '10%',
                                 padding: '1vmin 3vmin',
                                 background: 'rgba(128, 128, 128, 0.6)', // 半透明灰色背景
@@ -415,50 +487,53 @@ export default function ExperimentPage() {
                     <div
                         style={{
                             position: 'absolute',
-                            top: '65%',
+                            top: '50%',
                             right: '40%',
                             display: 'flex',
-                            alignItems: 'center',
-                            justifyContent: 'center',
+                            flexDirection: 'column',
                             zIndex: 100,
                             gap: '0.5vw',
                         }}
                     >
-                        <div
-                            style={{
-                                width: '15vw',
-                                height: '2vw',
-                                backgroundColor: 'rgba(128, 128, 128, 0.6)', // 半透明灰色
-                                borderRadius: '1vmin',
-                                padding: '1vmin',
-                                boxShadow: '0 0 10px rgba(128, 128, 128, 0.6)', // 半透明灰色阴影
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                            }}
-                        >
+                        {group === 'D'? (
+                            <img
+                                src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
+                                alt="star"
+                                style={{
+                                    width: '4vw',
+                                    height: '4vw',
+                                }}
+                            />
+                            ): null}
+                        {group === 'C'? (
+                            <img
+                                src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
+                                alt="star"
+                                style={{
+                                    transform: videoPlaying ? 'translateX(16.0vw)' : 'translateX(0)',
+                                    width: '4vw',
+                                    height: '4vw',
+                                }}
+                            />
+                        ): null}
+                        {group === 'C' && videoPlaying ? (
+
                             <div
                                 style={{
-                                    whiteSpace: 'pre-wrap',
-                                    wordBreak: 'break-word',
-                                    color: '#fff', // 文字颜色为白色
-                                    fontSize: '1.2vw',
-                                    padding: '0.5vmin',
-                                    borderRadius: '0.5vmin',
+                                    width: '19vw',
+                                    height: '2vw',
                                     backgroundColor: 'rgba(128, 128, 128, 0.6)', // 半透明灰色
+                                    borderRadius: '1vmin',
+                                    padding: '1vmin',
+                                    boxShadow: '0 0 10px rgba(128, 128, 128, 0.6)', // 半透明灰色阴影
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    justifyContent: 'center',
                                 }}
                             >
-                                {aiResponse || '加载中...'}
+                                {aiResponse || '聆听中...'}
                             </div>
-                        </div>
-                        <img
-                            src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
-                            alt="star"
-                            style={{
-                                width: '3vw',
-                                height: '3vw',
-                            }}
-                        />
+                        ) : null}
                     </div>
                 ) : null}
             </main>
@@ -507,13 +582,13 @@ export default function ExperimentPage() {
             </footer>
 
             {/* ---------- 相似商品列表 ---------- */}
-            {showSimilarProducts && similarProducts.length > 0 && (
+            {resourcesLoaded && showSimilarProducts && similarProducts.length > 0 && (
                 <div
                     style={{
                         position: 'absolute',
-                        top: '23%',
-                        left: '40%', // Start from 40% of the screen width
-                        width: '20%', // Take up 20% of the screen width (from 40% to 60%)
+                        top: '28%',
+                        left: '40%',
+                        width: '20%',
                         display: 'flex',
                         gap: '1vmin',
                         zIndex: 1000,
@@ -529,19 +604,17 @@ export default function ExperimentPage() {
                             display: 'flex',
                             gap: '1vmin',
                             scrollBehavior: 'smooth',
-                            overflowX: 'auto', // Enable horizontal scrolling
+                            overflowX: 'auto',
                             scrollSnapType: 'x mandatory',
-                            msOverflowStyle: 'none', // Hide scrollbar for IE and Edge
-                            scrollbarWidth: 'none', // Hide scrollbar for Firefox
+                            msOverflowStyle: 'none',
+                            scrollbarWidth: 'none',
                         }}
                         onWheel={(e) => {
                             e.preventDefault();
                             const container = e.currentTarget;
                             if (e.deltaY < 0) {
-                                // Scroll left when scrolling up
                                 container.scrollLeft -= 100;
                             } else {
-                                // Scroll right when scrolling down
                                 container.scrollLeft += 100;
                             }
                         }}
