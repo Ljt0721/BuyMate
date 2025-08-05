@@ -63,17 +63,17 @@ def submit_experiment_info(request):
                 return JsonResponse({'success': False, 'error': 'Invalid subject_type'}, status=400)
             if data['subject_type'] not in ['A', 'B', 'C', 'D']:
                 return JsonResponse({'success': False, 'error': 'subject_type must be A, B, C, or D'}, status=400)
-            experiment = ExperimentInfo(
+
+            ExperimentInfo.objects.create(
                 subject_id=data['subject_id'],
                 experiment_id=data['experiment_id'],
                 subject_type=data['subject_type'],
                 choice=data['choice'],
                 choice_time=data['choice_time'],
             )
-            experiment.save()
             return JsonResponse({'success': True})
         except Exception as e:
-            return JsonResponse({'success': False, 'error': str(e)})
+            return JsonResponse({'success': False, 'error': str(e)}, status=500)
     else:
         return JsonResponse({'success': False, 'error': 'Only POST allowed'})
 

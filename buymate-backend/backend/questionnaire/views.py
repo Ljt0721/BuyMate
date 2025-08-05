@@ -47,18 +47,29 @@ def submit_pre_questionnaire(request):
                 if not isinstance(val, int) or not (1 <= val <= 7):
                     return JsonResponse({'success': False, 'error': f'Invalid ibs answer: {val}. Must be int between 1 and 7'}, status=400)
 
-            Pre_Questionnaire.objects.create(
-                id=data['id'],
-                age=data['age'],
-                gender=data['gender'],
-                education=data['education'],
-                income=data['income'],
-                shopping_preferences=data['shopping_preferences'],
-                live_shopping_frequency=data['live_shopping_frequency'],
-                ibs_answers=data['ibs_answers'],
-            )
-
-            return JsonResponse({'success': True})
+            if Pre_Questionnaire.objects.filter(id=data['id']).exists():
+                Pre_Questionnaire.objects.filter(id=data['id']).update(
+                    age=data['age'],
+                    gender=data['gender'],
+                    education=data['education'],
+                    income=data['income'],
+                    shopping_preferences=data['shopping_preferences'],
+                    live_shopping_frequency=data['live_shopping_frequency'],
+                    ibs_answers=data['ibs_answers'],
+                )
+                return JsonResponse({'success': True})
+            else:
+                Pre_Questionnaire.objects.create(
+                    id=data['id'],
+                    age=data['age'],
+                    gender=data['gender'],
+                    education=data['education'],
+                    income=data['income'],
+                    shopping_preferences=data['shopping_preferences'],
+                    live_shopping_frequency=data['live_shopping_frequency'],
+                    ibs_answers=data['ibs_answers'],
+                )
+                return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
     else:
@@ -96,15 +107,21 @@ def submit_post_questionnaire(request):
                 if not isinstance(val, int) or not (1 <= val <= 7):
                     return JsonResponse({'success': False, 'error': f'Invalid ueq answer: {val}. Must be int between 1 and 7'}, status=400)
 
-
-            Post_Questionnaire.objects.create(
-                id=data['id'],
-                ibs_answers=data['ibs_answers'],
-                sus_answers=data['sus_answers'],
-                ueq_answers=data['ueq_answers'],
-            )
-
-            return JsonResponse({'success': True})
+            if Post_Questionnaire.objects.filter(id=data['id']).exists():
+                Post_Questionnaire.objects.filter(id=data['id']).update(
+                    ibs_answers=data['ibs_answers'],
+                    sus_answers=data['sus_answers'],
+                    ueq_answers=data['ueq_answers'],
+                )
+                return JsonResponse({'success': True})
+            else:
+                Post_Questionnaire.objects.create(
+                    id=data['id'],
+                    ibs_answers=data['ibs_answers'],
+                    sus_answers=data['sus_answers'],
+                    ueq_answers=data['ueq_answers'],
+                )
+                return JsonResponse({'success': True})
         except Exception as e:
             return JsonResponse({'success': False, 'error': str(e)}, status=500)
 

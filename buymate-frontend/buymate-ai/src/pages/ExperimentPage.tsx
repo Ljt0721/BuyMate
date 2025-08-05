@@ -144,6 +144,12 @@ export default function ExperimentPage() {
 
     const submitExperiment = async (choice: boolean) => {
         try {
+            const totalSeconds = timeUsed / 1000;
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            const formattedTime = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${seconds.toFixed(6).padStart(9, '0')}`;
+
             const response = await fetch(
                 `${config.BACKEND_BASE_URL}/experiment_api/experiment/submit/`,
                 {
@@ -154,7 +160,7 @@ export default function ExperimentPage() {
                         experiment_id: expId,
                         subject_type: group,
                         choice: choice,
-                        choice_time: `${(timeUsed / 1000).toFixed(2)}s`,
+                        choice_time: formattedTime,
                     }),
                 }
             );
@@ -226,7 +232,7 @@ export default function ExperimentPage() {
                         color: '#3d9712',
                         border: '0.2vmin solid #3d9712',
                         borderRadius: '1.2vmin',
-                        fontSize: '2.5vw',
+                        fontSize: 'clamp(3vw, 3vw, 3vw)'
                     }}
                 >
                     {group}组：{GROUP_DESC[group]}
@@ -246,13 +252,19 @@ export default function ExperimentPage() {
                 <aside
                     style={{
                         position: 'absolute',
+                        top: '20vh',
+                        left: '20px',
                         display: 'flex',
                         flexDirection: 'column',
                         gap: '2vw',
-                        marginRight: '5vw',
                         width: '15vw',
                         minWidth: 200,
-                        transform: 'translate(-20vw, 0)',
+                        zIndex: 5,
+                        padding: '2vh 1vw',
+                        backgroundColor: 'rgba(255, 255, 255, 0.6)',
+                        border: '1px solid #ccc',
+                        borderRadius: '1vmin',
+                        boxShadow: '0 0 10px rgba(0,0,0,0.1)',
                     }}
                 >
                     <label style={{ fontSize: 'clamp(2vw, 2vw, 2vw)', color: '#000' }}>
@@ -618,13 +630,13 @@ export default function ExperimentPage() {
                                             alignItems: 'center',
                                             marginBottom: '0.5vmin'
                                         }}>
-                                <span style={{
-                                    color: '#e53935',
-                                    fontWeight: 'bold',
-                                    fontSize: '1.4vmin'
-                                }}>
-                                    ¥{product.current_price}
-                                </span>
+                                            <span style={{
+                                                color: '#e53935',
+                                                fontWeight: 'bold',
+                                                fontSize: '1.4vmin'
+                                            }}>
+                                                ¥{product.current_price}
+                                            </span>
                                             {product.original_price && product.original_price !== product.current_price && (
                                                 <span style={{
                                                     color: '#999',
@@ -632,8 +644,8 @@ export default function ExperimentPage() {
                                                     marginLeft: '1vmin',
                                                     fontSize: '1.2vmin'
                                                 }}>
-                                        ¥{product.original_price}
-                                    </span>
+                                                    ¥{product.original_price}
+                                                </span>
                                             )}
                                         </div>
 
@@ -664,8 +676,8 @@ export default function ExperimentPage() {
                                                     borderRadius: '0.3vmin',
                                                     fontSize: '1.0vmin'
                                                 }}>
-                                        {feature}
-                                    </span>
+                                                    {feature}
+                                                </span>
                                             ))}
                                         </div>
 
