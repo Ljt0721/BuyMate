@@ -3,8 +3,8 @@ from .models import ProductInfo, ExperimentInfo
 import json
 from django.views.decorators.csrf import csrf_exempt
 from collections import defaultdict
-from ai_utils import get_tag, get_translation
-from utils import save_to_mp3
+from .ai_utils import get_tag, get_translation
+from .utils import save_to_mp3
 import time
 import os
 
