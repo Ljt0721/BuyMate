@@ -35,8 +35,8 @@ interface Product {
 }
 
 interface TimestampedText {
-    time: number; // 时间戳（秒）
-    content: string; // 文字内容
+    start: number; // 时间戳（秒）
+    text: string; // 文字内容
 }
 
 export default function ExperimentPage() {
@@ -60,6 +60,7 @@ export default function ExperimentPage() {
     const [resourcesLoaded, setResourcesLoaded] = useState(false); // 新增状态：资源是否加载完成
     const [videoPlaying, setVideoPlaying] = useState(false); // 新增状态：视频是否开始播放
     const [timestampedTexts, setTimestampedTexts] = useState<TimestampedText[]>([]);
+    const [audioUrl, setAudioUrl] = useState<string | null>(null);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     /* ---------- 计时器 ---------- */
@@ -100,7 +101,7 @@ export default function ExperimentPage() {
 
     const fetchTimestampedTexts = async () => {
         try {
-            const response = await fetch(`${config.BACKEND_BASE_URL}/media/json/${expId}.json`);
+            const response = await fetch(`${config.BACKEND_BASE_URL}/media/json_outputs/${expId}_transcript.json`);
 
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
@@ -130,7 +131,7 @@ export default function ExperimentPage() {
             }
 
             const data = await response.json();
-            if (data.success) {
+            if (data.success && data.tags_list && data.tags_list.length > 0) {
                 setAiResponse(data.translation);
             } else {
                 console.error('Failed to get AI translation:', data.error);
@@ -144,10 +145,10 @@ export default function ExperimentPage() {
         if (startTs && timestampedTexts.length > 0) {
             const interval = setInterval(() => {
                 const currentTime = (Date.now() - startTs) / 1000; // 当前时间（秒）
-                const nextText = timestampedTexts.find((t) => t.time <= currentTime + 4.6 && t.time >= currentTime + 3.4);
+                const nextText = timestampedTexts.find((t) => t.start <= currentTime + 3.6 && t.start >= currentTime + 2.4);
 
                 if (nextText) {
-                    getAiTranslation(nextText.content);
+                    getAiTranslation(nextText.text);
                 }
             }, 1000); // 每秒检查一次
 
@@ -275,6 +276,29 @@ export default function ExperimentPage() {
         setShowSimilarProducts(!showSimilarProducts);
     };
 
+    const getAudioFromText = async (text: string) => {
+        try {
+            const encodedText = encodeURIComponent(text);
+            const response = await fetch(
+                `${config.BACKEND_BASE_URL}/experiment_api/experiment/get_audio/?text=${encodedText}`
+            );
+
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+
+            const blob = await response.blob();
+            const audioUrlObject = URL.createObjectURL(blob);
+            setAudioUrl(audioUrlObject); // 更新音频 URL
+        } catch (error) {
+            console.error('Error getting audio:', error);
+        }
+    };
+    useEffect(() => {
+        if (aiResponse) {
+            getAudioFromText(aiResponse);
+        }
+    }, [aiResponse]);
     /* ---------- 渲染 ---------- */
     return (
         <div
@@ -542,6 +566,22 @@ export default function ExperimentPage() {
                                 {aiResponse || '聆听中...'}
                             </div>
                         ) : null}
+                        {group === 'D' && audioUrl && (
+                            <audio
+                                src={audioUrl}
+                                autoPlay
+                                onPlay={() => {
+                                    if (videoRef.current) {
+                                        videoRef.current.volume = 0.2; // 将视频音量调小到 20%
+                                    }
+                                }}
+                                onEnded={() => {
+                                    if (videoRef.current) {
+                                        videoRef.current.volume = 1.0; // 恢复视频音量到 100%
+                                    }
+                                }}
+                            />
+                        )}
                     </div>
                 ) : null}
             </main>
