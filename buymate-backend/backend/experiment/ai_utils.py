@@ -57,6 +57,7 @@ def get_tag(tags: str = default_tag, speech: str = "") -> Optional[Tuple[List[st
                 '    "keywords": ["关键词1", "关键词2"]\n'
                 "}\n"
                 "注意：tags 最多返回两个话术类型；keywords 允许匹配语义相近的关键词。如果你找到了某个tag，那么你一定要返回至少一个关键词。\n"
+                "如果没有找到任何话术类型和关键词，请返回空的 tags 和 keywords 列表。\n"
             )
         },
         {
@@ -113,7 +114,7 @@ def get_translation(tag_result: List[str], keywords: List[str], speech: str) -> 
                 "   - 去除诱导性、煽动性表达，用客观中立的语气改写；\n"
                 "   - 引导用户从自身需求出发理性决策（如建议考虑适用性、实际需求、比价等）；\n"
                 "   - 语言简洁自然，避免生硬说教。\n"
-                "   - 注意尽量不要与原来的语句太过于相似。\n"
+                "   - 注意尽量不要与原来的语句太过于相似。同时控制转译的长度，不要超过15个字，严格控制最后返回转译内容的长度。\n"
             )
         },
         {

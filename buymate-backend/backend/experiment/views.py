@@ -7,6 +7,7 @@ from .ai_utils import get_tag, get_translation
 from .utils import save_to_mp3
 import time
 import os
+import threading
 
 @csrf_exempt
 def get_products_by_experiment_id(request):
@@ -114,7 +115,7 @@ def get_ai_translation(request):
         return JsonResponse({'success': False, 'error': 'Missing text parameter'}, status=400)
     
     tags_list, keywords_list = get_tag(text)
-    if tags_list is None or keywords_list is None:
+    if tags_list is None or keywords_list is None or tags_list == [] or keywords_list == []:
         return JsonResponse({'success': True, 'tags_list': None, 'keywords_list': None, 'translation': None}, status=200)
     else:
         translation = get_translation(tags_list, keywords_list, text)
@@ -141,6 +142,18 @@ def get_audio(request):
     if os.path.exists(filepath):
         response = FileResponse(open(filepath, 'rb'), content_type='audio/mpeg')
         response['Content-Disposition'] = f'attachment; filename="{filename}"'
+
+        def delayed_delete(path, delay=2):
+            def delete():
+                time.sleep(delay)
+                try:
+                    os.remove(path)
+                    print(f"[INFO] Deleted file: {path}")
+                except Exception as e:
+                    print(f"[ERROR] Failed to delete {path}: {e}")
+            threading.Thread(target=delete, daemon=True).start()
+
+        delayed_delete(filepath)
 
         try:
             os.remove(filepath)
