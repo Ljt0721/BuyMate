@@ -4,6 +4,7 @@ Thumbs.db
 *.iml
 *.log
 *.pyc
+*.mp4
 __pycache__/
 
 # === Python / Django ===
