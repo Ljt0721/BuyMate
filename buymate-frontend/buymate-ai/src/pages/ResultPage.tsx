@@ -11,8 +11,36 @@ const groupsMap: Record<number, string> = {
 };
 
 const productNames = [
-    '商品1', '商品2', '商品3', '商品4',
-    '商品5', '商品6', '商品7', '商品8'
+    '红裙子',
+    '牛仔外套撞色吊带',
+    '波点上衣',
+    'Hello KittyT恤',
+    '亲肤短袖',
+    '黄色无袖',
+    '连衣裙',
+    'ROZO唇泥',
+    '橘朵眼影盘',
+    '眼线笔',
+    '假睫毛11',
+    '唇蜜12',
+    '泊本水乳',
+    'uodo粉底液',
+    '氨糖软骨素',
+    '按摩仪',
+    '豆浆粉',
+    '蛋白粉',
+    '防脱发洗发液',
+    '牛肉',
+    '脱骨鸡爪',
+    '大肚锅',
+    '江中体重管理益生菌',
+    '卫生纸',
+    '铁观音',
+    '床单',
+    '不粘锅',
+    '收纳箱',
+    '抱枕',
+    '洗衣凝胶'
 ];
 
 interface GroupResult {
@@ -75,7 +103,7 @@ export default function ResultPage() {
                                     {items.map((id, i) => (
                                         <div key={i} className={styles.productItem}>
                                             <img
-                                                src={`${config.BACKEND_BASE_URL}/media/images/${id}-1.jpg`}
+                                                src={`${config.BACKEND_BASE_URL}/media/images/${id}.jpg`}
                                                 alt={`商品${id}`}
                                                 className={styles.productImage}
                                             />
