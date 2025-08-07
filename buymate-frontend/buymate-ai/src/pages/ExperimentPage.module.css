@@ -1,0 +1,14 @@
+/* 隐藏默认滚动条 */
+.scrollable-container {
+    overflow: hidden;
+}
+
+.scrollable-container::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+    background: transparent;
+}
+
+.scrollable-container::-webkit-scrollbar-thumb {
+    background: transparent;
+}

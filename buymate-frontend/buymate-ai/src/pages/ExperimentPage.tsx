@@ -572,12 +572,12 @@ export default function ExperimentPage() {
                                 autoPlay
                                 onPlay={() => {
                                     if (videoRef.current) {
-                                        videoRef.current.volume = 0.2; // 将视频音量调小到 20%
+                                        videoRef.current.volume = 0.2;
                                     }
                                 }}
                                 onEnded={() => {
                                     if (videoRef.current) {
-                                        videoRef.current.volume = 1.0; // 恢复视频音量到 100%
+                                        videoRef.current.volume = 1.0;
                                     }
                                 }}
                             />
@@ -644,7 +644,7 @@ export default function ExperimentPage() {
                         padding: '1vmin',
                         borderRadius: '0.5vmin',
                         boxShadow: '0 0 5px rgba(0, 0, 0, 0.1)',
-                        overflow: 'hidden', // 隐藏滚动条
+                        overflow: 'hidden',
                     }}
                 >
                     <div
@@ -652,19 +652,33 @@ export default function ExperimentPage() {
                             display: 'flex',
                             gap: '1vmin',
                             scrollBehavior: 'smooth',
-                            overflowX: 'auto',
+                            overflowX: 'hidden', // 隐藏默认滚动条
                             scrollSnapType: 'x mandatory',
                             msOverflowStyle: 'none',
                             scrollbarWidth: 'none',
                         }}
-                        onWheel={(e) => {
-                            e.preventDefault();
+                        onWheel={(_e: React.WheelEvent<HTMLDivElement>) => {
+                            // 如果拖动功能和鼠标滚动冲突，可以在这里处理冲突逻辑
+                            // 否则保留鼠标滚动功能
+                            // _e.preventDefault(); // 如果需要禁用鼠标滚轮滚动，取消注释
+                        }}
+                        onMouseDown={(e: React.MouseEvent<HTMLDivElement>) => {
                             const container = e.currentTarget;
-                            if (e.deltaY < 0) {
-                                container.scrollLeft -= 100;
-                            } else {
-                                container.scrollLeft += 100;
-                            }
+                            const startX = e.clientX;
+                            const startScrollLeft = container.scrollLeft;
+
+                            const onMouseMove = (e: MouseEvent) => {
+                                const dx = e.clientX - startX;
+                                container.scrollLeft = startScrollLeft - dx;
+                            };
+
+                            const onMouseUp = () => {
+                                document.removeEventListener('mousemove', onMouseMove);
+                                document.removeEventListener('mouseup', onMouseUp);
+                            };
+
+                            document.addEventListener('mousemove', onMouseMove);
+                            document.addEventListener('mouseup', onMouseUp);
                         }}
                     >
                         {similarProducts.map((product) => (
@@ -751,13 +765,13 @@ export default function ExperimentPage() {
                                             alignItems: 'center',
                                             marginBottom: '0.5vmin'
                                         }}>
-                                            <span style={{
-                                                color: '#e53935',
-                                                fontWeight: 'bold',
-                                                fontSize: '1.4vmin'
-                                            }}>
-                                                ¥{product.current_price}
-                                            </span>
+                            <span style={{
+                                color: '#e53935',
+                                fontWeight: 'bold',
+                                fontSize: '1.4vmin'
+                            }}>
+                                ¥{product.current_price}
+                            </span>
                                             {product.original_price && product.original_price !== product.current_price && (
                                                 <span style={{
                                                     color: '#999',
@@ -765,8 +779,8 @@ export default function ExperimentPage() {
                                                     marginLeft: '1vmin',
                                                     fontSize: '1.2vmin'
                                                 }}>
-                                                    ¥{product.original_price}
-                                                </span>
+                                    ¥{product.original_price}
+                                </span>
                                             )}
                                         </div>
 
@@ -789,7 +803,7 @@ export default function ExperimentPage() {
                                             gap: '0.5vmin',
                                             marginBottom: '0.5vmin'
                                         }}>
-                                            {product.features.slice(0, 3).map((feature: string, index: number) => (
+                                            {product.features.slice(0, 3).map((feature, index) => (
                                                 <span key={index} style={{
                                                     backgroundColor: '#f0f9eb',
                                                     color: '#67c23a',
@@ -797,8 +811,8 @@ export default function ExperimentPage() {
                                                     borderRadius: '0.3vmin',
                                                     fontSize: '1.0vmin'
                                                 }}>
-                                                    {feature}
-                                                </span>
+                                    {feature}
+                                </span>
                                             ))}
                                         </div>
 
