@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import config from '../config';
-
+import styles from  './ExperimentPage.module.css'
 const GROUP_DESC: Record<string, string> = {
     A: '无干预组',
     B: '真人干预组',
@@ -57,6 +57,7 @@ export default function ExperimentPage() {
     const [showSimilarProducts, setShowSimilarProducts] = useState(false);
     const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
     const [aiResponse, setAiResponse] = useState<string | null>(null);
+    const [tagsList, setTagsList] = useState<string[] | null>(null);
     const [resourcesLoaded, setResourcesLoaded] = useState(false); // 新增状态：资源是否加载完成
     const [videoPlaying, setVideoPlaying] = useState(false); // 新增状态：视频是否开始播放
     const [timestampedTexts, setTimestampedTexts] = useState<TimestampedText[]>([]);
@@ -133,6 +134,7 @@ export default function ExperimentPage() {
             const data = await response.json();
             if (data.success && data.tags_list && data.tags_list.length > 0) {
                 setAiResponse(data.translation);
+                setTagsList(data.tags_list);
             } else {
                 console.error('Failed to get AI translation:', data.error);
             }
@@ -565,6 +567,7 @@ export default function ExperimentPage() {
                             >
                                 {aiResponse || '聆听中...'}
                             </div>
+
                         ) : null}
                         {group === 'D' && audioUrl && (
                             <audio
@@ -582,6 +585,25 @@ export default function ExperimentPage() {
                                 }}
                             />
                         )}
+                        {(group === 'C' || group === 'D')&& videoPlaying ? (
+                        <div
+                            style={{
+                                width: '19vw',
+                                height: 'auto',
+                                minHeight: '1.2vw',
+                                backgroundColor: 'rgba(128, 128, 128, 0.6)', // 半透明灰色
+                                borderRadius: '1vmin',
+                                padding: '1vmin',
+                                boxShadow: '0 0 10px rgba(128, 128, 128, 0.6)', // 半透明灰色阴影
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                fontSize: '0.8vw',
+                            }}
+                        >
+                            {tagsList?.join(', ')}
+                        </div>
+                        ): null}
                     </div>
                 ) : null}
             </main>
@@ -656,6 +678,7 @@ export default function ExperimentPage() {
                             scrollSnapType: 'x mandatory',
                             msOverflowStyle: 'none',
                             scrollbarWidth: 'none',
+                            zIndex: 100,
                         }}
                         onWheel={(_e: React.WheelEvent<HTMLDivElement>) => {
                             // 如果拖动功能和鼠标滚动冲突，可以在这里处理冲突逻辑
@@ -695,7 +718,9 @@ export default function ExperimentPage() {
                                     flexDirection: 'column',
                                     fontSize: '1.2vmin', // 调整字体大小
                                     scrollSnapAlign: 'start',
+
                                 }}
+                                className = {styles.noSelect}
                             >
                                 {/* 商品图片部分 */}
                                 <div style={{
@@ -727,7 +752,8 @@ export default function ExperimentPage() {
                                     display: 'flex',
                                     flexDirection: 'column',
                                     justifyContent: 'space-between'
-                                }}>
+                                }}
+                                >
                                     <div>
                                         <h3 style={{
                                             margin: '0 0 0.5vmin 0',

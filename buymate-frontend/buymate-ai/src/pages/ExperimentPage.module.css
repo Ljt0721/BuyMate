@@ -12,3 +12,10 @@
 .scrollable-container::-webkit-scrollbar-thumb {
     background: transparent;
 }
+/* 禁止选中内容 */
+.noSelect {
+    user-select: none !important;
+    -webkit-user-select: none !important;
+    -moz-user-select: none !important;
+    -ms-user-select: none !important;
+}
