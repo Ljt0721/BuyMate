@@ -155,11 +155,6 @@ def get_audio(request):
 
         delayed_delete(filepath)
 
-        try:
-            os.remove(filepath)
-        except Exception as e:
-            print(f"Error deleting file: {e}")
-
         return response
     else:
         return HttpResponseNotFound(JsonResponse({

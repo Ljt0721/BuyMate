@@ -83,7 +83,7 @@ export default function ResultPage() {
                     onClick={() => nav('/')}
                 >
                     <img
-                        src={`${config.BACKEND_BASE_URL}/media/images/back.jpg`}
+                        src={`${config.BACKEND_BASE_URL}/media/images/back.png`}
                         alt="back"
                         style={{ width: '2vw', height: '2vw', pointerEvents: 'none' }}
                     />

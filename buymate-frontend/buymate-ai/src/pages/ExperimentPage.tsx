@@ -460,7 +460,7 @@ export default function ExperimentPage() {
                         }}
                     />
                     <img
-                        src={`${config.BACKEND_BASE_URL}/media/images/phone.jpg`}
+                        src={`${config.BACKEND_BASE_URL}/media/images/phone.png`}
                         alt="phone"
                         style={{
                             position: 'absolute',
@@ -495,7 +495,7 @@ export default function ExperimentPage() {
                             }}
                         >
                             <img
-                                src={`${config.BACKEND_BASE_URL}/media/images/star.jpg`}
+                                src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
                                 alt="star"
                                 style={{
                                     position: 'relative',
@@ -528,7 +528,7 @@ export default function ExperimentPage() {
                     >
                         {group === 'D' ? (
                             <img
-                                src={`${config.BACKEND_BASE_URL}/media/images/star.jpg`}
+                                src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
                                 alt="star"
                                 style={{
                                     width: '4vw',
@@ -538,7 +538,7 @@ export default function ExperimentPage() {
                         ) : null}
                         {group === 'C' ? (
                             <img
-                                src={`${config.BACKEND_BASE_URL}/media/images/star.jpg`}
+                                src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
                                 alt="star"
                                 style={{
                                     transform: videoPlaying ? 'translateX(16.0vw)' : 'translateX(0)',
