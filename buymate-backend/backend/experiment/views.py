@@ -114,16 +114,16 @@ def get_ai_translation(request):
     if not text:
         return JsonResponse({'success': False, 'error': 'Missing text parameter'}, status=400)
     
-    tags_list, keywords_list = get_tag(text)
-    if tags_list is None or keywords_list is None or tags_list == [] or keywords_list == []:
-        return JsonResponse({'success': True, 'tags_list': None, 'keywords_list': None, 'translation': None}, status=200)
+    tag, keyword = get_tag(text)
+    if tag is None or keyword is None or tag == '' or keyword == '':
+        return JsonResponse({'success': True, 'tag': None, 'keyword': None, 'translation': None}, status=200)
     else:
-        translation = get_translation(tags_list, keywords_list, text)
+        translation = get_translation(tag, keyword, text)
         if translation is None:
             return JsonResponse({'success': False, 'error': 'Failed to get translation'}, status=500)
         else:
-            return JsonResponse({'success': True, 'tags_list': tags_list, 'keywords_list': keywords_list, 'translation': translation}, status=200)
-    
+            return JsonResponse({'success': True, 'tag': tag, 'keyword': keyword, 'translation': translation}, status=200)
+
 @csrf_exempt
 def get_audio(request):
     if request.method != 'GET':

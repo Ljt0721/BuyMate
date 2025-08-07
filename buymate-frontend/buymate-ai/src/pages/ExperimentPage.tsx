@@ -1,7 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import config from '../config';
-import styles from  './ExperimentPage.module.css'
+import styles from './ExperimentPage.module.css'
 const GROUP_DESC: Record<string, string> = {
     A: '无干预组',
     B: '真人干预组',
@@ -56,8 +56,7 @@ export default function ExperimentPage() {
     const [isLoading, setIsLoading] = useState(false);
     const [showSimilarProducts, setShowSimilarProducts] = useState(false);
     const [similarProducts, setSimilarProducts] = useState<Product[]>([]);
-    const [aiResponse, setAiResponse] = useState<string | null>(null);
-    const [tagsList, setTagsList] = useState<string[] | null>(null);
+    const [aiResponse, setAiResponse] = useState<string[] | null>(null);
     const [resourcesLoaded, setResourcesLoaded] = useState(false); // 新增状态：资源是否加载完成
     const [videoPlaying, setVideoPlaying] = useState(false); // 新增状态：视频是否开始播放
     const [timestampedTexts, setTimestampedTexts] = useState<TimestampedText[]>([]);
@@ -132,35 +131,36 @@ export default function ExperimentPage() {
             }
 
             const data = await response.json();
-            if (resourcesLoaded && data.success && data.tags_list && data.tags_list.length > 0) {
-                setAiResponse(data.translation);
-                setTagsList(data.tags_list);
-            } else {
-                console.error('Failed to get AI translation:', data.error);
+            if (!data) {
+                console.error('No data received from AI translation API');
+                return;
+            }
+            else if (!data.success) {
+                console.error('AI translation API returned an error:', data.error);
+                return;
+            }
+            else if (data.success && !data.tag && !data.keyword) {
+                console.log('AI translation returned empty tag, skipping:', text);
+
+            } else if (data.success && data.tag && data.tag !== '') {
+                setAiResponse([`检测到表述“${data.keyword}”主播正在使用“${data.tag}“话术`, data.translation]);
+            }
+            else {
+                console.error('Unexpected response format from AI translation API:', data);
             }
         } catch (error) {
             console.error('Error getting AI translation:', error);
         }
     };
 
-    const clearAiResponse = () => {
-        setAiResponse(null);
-        setTagsList(null);
-    };
-
-    {/*最重要的AI Translate模块，有几个参数可以调*/}
     useEffect(() => {
-        if (startTs && resourcesLoaded && timestampedTexts.length > 0) {
+        if (startTs && timestampedTexts.length > 0) {
             const interval = setInterval(() => {
                 const currentTime = (Date.now() - startTs) / 1000; // 当前时间（秒）
-                const nextText = timestampedTexts.find((t) => t.start <= currentTime + 0.5 && t.start >= currentTime - 0.5);
+                const nextText = timestampedTexts.find((t) => t.start <= currentTime + 3.6 && t.start >= currentTime + 2.4);
 
                 if (nextText) {
                     getAiTranslation(nextText.text);
-                    const timeoutId = setTimeout(() => {
-                        clearAiResponse();
-                    }, 5000);
-                    return () => clearTimeout(timeoutId);
                 }
             }, 1000); // 每秒检查一次
 
@@ -201,7 +201,7 @@ export default function ExperimentPage() {
 
         return () => {
             if (videoRef.current) {
-                videoRef.current.removeEventListener('loadeddata', () => {});
+                videoRef.current.removeEventListener('loadeddata', () => { });
             }
         };
     }, [expId, similarProducts]);
@@ -234,6 +234,7 @@ export default function ExperimentPage() {
 
     const submitExperiment = async (choice: boolean) => {
         try {
+            console.log('Submitting experiment data...' + timeUsed);
             const totalSeconds = timeUsed / 1000;
             const hours = Math.floor(totalSeconds / 3600);
             const minutes = Math.floor((totalSeconds % 3600) / 60);
@@ -308,9 +309,41 @@ export default function ExperimentPage() {
     };
     useEffect(() => {
         if (aiResponse) {
-            getAudioFromText(aiResponse);
+            getAudioFromText(aiResponse[1]);
         }
     }, [aiResponse]);
+
+    const [displayedText, setDisplayedText] = useState('');
+    useEffect(() => {
+        if (group === 'C' && videoPlaying && Array.isArray(aiResponse)) {
+            setDisplayedText(aiResponse[0] || '');
+
+            const timers: NodeJS.Timeout[] = [];
+
+            if (aiResponse.length > 1) {
+                // 3.5 秒后显示translation
+                const secondTimer = setTimeout(() => {
+                    setDisplayedText(aiResponse[1]);
+
+                    // 再过 3.5 秒清空
+                    const clearTimer = setTimeout(() => {
+                        setDisplayedText('');
+                    }, 3500);
+
+                    timers.push(clearTimer);
+                }, 3500);
+
+                timers.push(secondTimer);
+            }
+
+            return () => {
+                timers.forEach(clearTimeout);
+            };
+        } else if (typeof aiResponse === 'string') {
+            setDisplayedText(aiResponse);
+        }
+    }, [aiResponse, group, videoPlaying]);
+
     /* ---------- 渲染 ---------- */
     return (
         <div
@@ -465,6 +498,7 @@ export default function ExperimentPage() {
                             if (startTs) {
                                 setTimeUsed(Date.now() - startTs);
                                 setStartTs(null);
+                                handleChoice(false);
                             }
                         }}
                     />
@@ -522,11 +556,11 @@ export default function ExperimentPage() {
                     ) : null}
                 </div>
 
-                {resourcesLoaded && (group === 'C' || group === 'D') ? (
+                {group === 'C' || group === 'D' ? (
                     <div
                         style={{
                             position: 'absolute',
-                            top: '50%',
+                            top: '55%',
                             right: '40%',
                             display: 'flex',
                             flexDirection: 'column',
@@ -534,7 +568,6 @@ export default function ExperimentPage() {
                             gap: '0.5vw',
                         }}
                     >
-
                         {group === 'C' && aiResponse ? (
                             <img
                                 src={`${config.BACKEND_BASE_URL}/media/images/描述中.gif`}
@@ -557,7 +590,6 @@ export default function ExperimentPage() {
                                 }}
                             />
                         ) : null}
-
                         {group === 'C' && videoPlaying ? (
                             <div
                                 style={{
@@ -571,10 +603,11 @@ export default function ExperimentPage() {
                                     display: 'flex',
                                     alignItems: 'center',
                                     justifyContent: 'center',
-                                    fontSize: '1vw',
+                                    fontSize: '1.2vw',
+                                    color: '#FFF674'
                                 }}
                             >
-                                {aiResponse || '聆听中...'}
+                                {displayedText || '聆听中...'}
                             </div>
 
                         ) : null}
@@ -585,7 +618,6 @@ export default function ExperimentPage() {
                                 style={{
                                     width: '4vw',
                                     height: '4vw',
-                                    transform: 'translateX(16.0vw)'
                                 }}
                             />
                         ) : null}
@@ -596,7 +628,6 @@ export default function ExperimentPage() {
                                 style={{
                                     width: '4vw',
                                     height: '4vw',
-                                    transform: videoPlaying ? 'translateX(16.0vw)' : 'translateX(0)',
                                 }}
                             />
                         ) : null}
@@ -616,25 +647,6 @@ export default function ExperimentPage() {
                                 }}
                             />
                         )}
-                        {(group === 'C' || group === 'D')&& videoPlaying ? (
-                        <div
-                            style={{
-                                width: '19vw',
-                                height: 'auto',
-                                minHeight: '1.2vw',
-                                backgroundColor: 'rgba(128, 128, 128, 0.6)', // 半透明灰色
-                                borderRadius: '1vmin',
-                                padding: '1vmin',
-                                boxShadow: '0 0 10px rgba(128, 128, 128, 0.6)', // 半透明灰色阴影
-                                display: 'flex',
-                                alignItems: 'center',
-                                justifyContent: 'center',
-                                fontSize: '0.8vw',
-                            }}
-                        >
-                            {tagsList?.join(', ')}
-                        </div>
-                        ): null}
                     </div>
                 ) : null}
             </main>
@@ -751,7 +763,7 @@ export default function ExperimentPage() {
                                     scrollSnapAlign: 'start',
 
                                 }}
-                                className = {styles.noSelect}
+                                className={styles.noSelect}
                             >
                                 {/* 商品图片部分 */}
                                 <div style={{
@@ -822,13 +834,13 @@ export default function ExperimentPage() {
                                             alignItems: 'center',
                                             marginBottom: '0.5vmin'
                                         }}>
-                            <span style={{
-                                color: '#e53935',
-                                fontWeight: 'bold',
-                                fontSize: '1.4vmin'
-                            }}>
-                                ¥{product.current_price}
-                            </span>
+                                            <span style={{
+                                                color: '#e53935',
+                                                fontWeight: 'bold',
+                                                fontSize: '1.4vmin'
+                                            }}>
+                                                ¥{product.current_price}
+                                            </span>
                                             {product.original_price && product.original_price !== product.current_price && (
                                                 <span style={{
                                                     color: '#999',
@@ -836,8 +848,8 @@ export default function ExperimentPage() {
                                                     marginLeft: '1vmin',
                                                     fontSize: '1.2vmin'
                                                 }}>
-                                    ¥{product.original_price}
-                                </span>
+                                                    ¥{product.original_price}
+                                                </span>
                                             )}
                                         </div>
 
@@ -868,8 +880,8 @@ export default function ExperimentPage() {
                                                     borderRadius: '0.3vmin',
                                                     fontSize: '1.0vmin'
                                                 }}>
-                                    {feature}
-                                </span>
+                                                    {feature}
+                                                </span>
                                             ))}
                                         </div>
 

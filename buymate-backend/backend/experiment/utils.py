@@ -8,7 +8,7 @@ def save_to_mp3(text, filepath):
         communicate = edge_tts.Communicate(
             text=text,
             voice="zh-CN-XiaoxiaoNeural",
-            rate="+100%"
+            rate="+0%"
         )
         await communicate.save(filepath)
 
