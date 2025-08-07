@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import config from '../config';
+//import config from '../config';
 
 export default function IntroPage() {
     const nav = useNavigate();
@@ -40,7 +40,7 @@ export default function IntroPage() {
     };
 
     /* ---------- 数据集导出 ---------- */
-    const exportData = async () => {
+    /* const exportData = async () => {
         if (!userId)   return alert('缺少用户 ID');
         if (!preDone)  return alert('请先完成前测量表');
         if (!postDone) return alert('请先完成后测量表');
@@ -70,6 +70,7 @@ export default function IntroPage() {
             alert('导出失败，请稍后重试');
         }
     };
+    */
 
     /* ---------- 渲染 ---------- */
     return (
@@ -209,7 +210,7 @@ export default function IntroPage() {
                 >
                     决策结果汇总
                 </button>
-
+                {/*
                 <button
                     style={{
                         fontSize: 'clamp(2vw, 2vw, 2vw)',
@@ -224,6 +225,7 @@ export default function IntroPage() {
                 >
                     数据集导出
                 </button>
+                */}
             </footer>
 
             {/* ---------- 弹窗 ---------- */}

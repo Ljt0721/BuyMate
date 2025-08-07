@@ -132,7 +132,7 @@ export default function ExperimentPage() {
             }
 
             const data = await response.json();
-            if (data.success && data.tags_list && data.tags_list.length > 0) {
+            if (resourcesLoaded && data.success && data.tags_list && data.tags_list.length > 0) {
                 setAiResponse(data.translation);
                 setTagsList(data.tags_list);
             } else {
@@ -143,14 +143,24 @@ export default function ExperimentPage() {
         }
     };
 
+    const clearAiResponse = () => {
+        setAiResponse(null);
+        setTagsList(null);
+    };
+
+    {/*最重要的AI Translate模块，有几个参数可以调*/}
     useEffect(() => {
-        if (startTs && timestampedTexts.length > 0) {
+        if (startTs && resourcesLoaded && timestampedTexts.length > 0) {
             const interval = setInterval(() => {
                 const currentTime = (Date.now() - startTs) / 1000; // 当前时间（秒）
-                const nextText = timestampedTexts.find((t) => t.start <= currentTime + 3.6 && t.start >= currentTime + 2.4);
+                const nextText = timestampedTexts.find((t) => t.start <= currentTime + 0.5 && t.start >= currentTime - 0.5);
 
                 if (nextText) {
                     getAiTranslation(nextText.text);
+                    const timeoutId = setTimeout(() => {
+                        clearAiResponse();
+                    }, 5000);
+                    return () => clearTimeout(timeoutId);
                 }
             }, 1000); // 每秒检查一次
 
@@ -427,9 +437,6 @@ export default function ExperimentPage() {
                         结束实验
                     </button>
 
-                    <div style={{ fontSize: '1vw', color: '#000' }}>
-                        用时：{(timeUsed / 1000).toFixed(2)} 秒
-                    </div>
                 </aside>
 
                 {/* 手机 + 视频 */}
@@ -480,12 +487,11 @@ export default function ExperimentPage() {
                             onClick={toggleSimilarProducts}
                             style={{
                                 position: 'absolute',
-                                top: '20%',
+                                top: '12%',
                                 left: '10%',
-                                padding: '1vmin 3vmin',
                                 background: 'rgba(128, 128, 128, 0.6)', // 半透明灰色背景
                                 border: '0.1vw solid rgba(128, 128, 128, 0.6)', // 半透明灰色边框
-                                borderRadius: '1vmin',
+                                borderRadius: '1vw',
                                 cursor: 'pointer',
                                 width: '11vw',
                                 gap: '0.2vw',
@@ -516,7 +522,7 @@ export default function ExperimentPage() {
                     ) : null}
                 </div>
 
-                {group === 'C' || group === 'D' ? (
+                {resourcesLoaded && (group === 'C' || group === 'D') ? (
                     <div
                         style={{
                             position: 'absolute',
@@ -528,19 +534,10 @@ export default function ExperimentPage() {
                             gap: '0.5vw',
                         }}
                     >
-                        {group === 'D' ? (
+
+                        {group === 'C' && aiResponse ? (
                             <img
-                                src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
-                                alt="star"
-                                style={{
-                                    width: '4vw',
-                                    height: '4vw',
-                                }}
-                            />
-                        ) : null}
-                        {group === 'C' ? (
-                            <img
-                                src={`${config.BACKEND_BASE_URL}/media/images/star.png`}
+                                src={`${config.BACKEND_BASE_URL}/media/images/描述中.gif`}
                                 alt="star"
                                 style={{
                                     transform: videoPlaying ? 'translateX(16.0vw)' : 'translateX(0)',
@@ -549,6 +546,18 @@ export default function ExperimentPage() {
                                 }}
                             />
                         ) : null}
+                        {group === 'C' && !aiResponse ? (
+                            <img
+                                src={`${config.BACKEND_BASE_URL}/media/images/聆听中.gif`}
+                                alt="star"
+                                style={{
+                                    transform: videoPlaying ? 'translateX(16.0vw)' : 'translateX(0)',
+                                    width: '4vw',
+                                    height: '4vw',
+                                }}
+                            />
+                        ) : null}
+
                         {group === 'C' && videoPlaying ? (
                             <div
                                 style={{
@@ -568,6 +577,28 @@ export default function ExperimentPage() {
                                 {aiResponse || '聆听中...'}
                             </div>
 
+                        ) : null}
+                        {group === 'D' && aiResponse ? (
+                            <img
+                                src={`${config.BACKEND_BASE_URL}/media/images/描述中.gif`}
+                                alt="star"
+                                style={{
+                                    width: '4vw',
+                                    height: '4vw',
+                                    transform: 'translateX(16.0vw)'
+                                }}
+                            />
+                        ) : null}
+                        {group === 'D' && !aiResponse ? (
+                            <img
+                                src={`${config.BACKEND_BASE_URL}/media/images/聆听中.gif`}
+                                alt="star"
+                                style={{
+                                    width: '4vw',
+                                    height: '4vw',
+                                    transform: videoPlaying ? 'translateX(16.0vw)' : 'translateX(0)',
+                                }}
+                            />
                         ) : null}
                         {group === 'D' && audioUrl && (
                             <audio
@@ -656,7 +687,7 @@ export default function ExperimentPage() {
                 <div
                     style={{
                         position: 'absolute',
-                        top: '28%',
+                        top: '20%',
                         left: '40%',
                         width: '20%',
                         display: 'flex',
