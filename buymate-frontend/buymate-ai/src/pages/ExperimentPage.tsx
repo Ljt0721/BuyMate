@@ -1,6 +1,7 @@
 import { useRef, useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import config from '../config';
+import styles from './ExperimentPage.module.css';
 
 const GROUP_DESC: Record<string, string> = {
     A: '无干预组',
@@ -189,7 +190,7 @@ export default function ExperimentPage() {
 
         return () => {
             if (videoRef.current) {
-                videoRef.current.removeEventListener('loadeddata', () => {});
+                videoRef.current.removeEventListener('loadeddata', () => { });
             }
         };
     }, [expId, similarProducts]);
@@ -301,7 +302,7 @@ export default function ExperimentPage() {
     }, [aiResponse]);
     /* ---------- 渲染 ---------- */
     return (
-        <div
+        <div className={styles.noSelect}
             style={{
                 width: '100vw',
                 height: '100vh',
@@ -698,7 +699,8 @@ export default function ExperimentPage() {
                                 }}
                             >
                                 {/* 商品图片部分 */}
-                                <div style={{
+                                <div className={styles.noSelect}
+                                style={{
                                     minHeight: '8vw',
                                     position: 'relative',
                                     overflow: 'hidden'
@@ -721,7 +723,8 @@ export default function ExperimentPage() {
                                 </div>
 
                                 {/* 商品信息部分 */}
-                                <div style={{
+                                <div className = {styles.noSelect}
+                                style={{
                                     padding: '1vmin',
                                     flex: 1,
                                     display: 'flex',
@@ -729,7 +732,8 @@ export default function ExperimentPage() {
                                     justifyContent: 'space-between'
                                 }}>
                                     <div>
-                                        <h3 style={{
+                                        <h3 className={styles.noSelect}
+                                        style={{
                                             margin: '0 0 0.5vmin 0',
                                             fontSize: '1.4vmin',
                                             fontWeight: 'bold',
@@ -740,7 +744,8 @@ export default function ExperimentPage() {
                                         }}>
                                             {product.name}
                                         </h3>
-                                        <p style={{
+                                        <p className={styles.noSelect}
+                                        style={{
                                             margin: '0 0 0.5vmin 0',
                                             fontSize: '1.2vmin',
                                             color: '#666'
@@ -749,7 +754,8 @@ export default function ExperimentPage() {
                                         </p>
 
                                         {/* 新增的价格比较信息 */}
-                                        <div style={{
+                                        <div className={styles.noSelect}
+                                        style={{
                                             fontSize: '1.2vmin',
                                             color: product.price_comparison.includes('优惠') ? '#f56c6c' : '#67c23a',
                                             margin: '0.5vmin 0'
@@ -760,32 +766,35 @@ export default function ExperimentPage() {
 
                                     <div>
                                         {/* 价格信息 */}
-                                        <div style={{
+                                        <div className={styles.noSelect}
+                                        style={{
                                             display: 'flex',
                                             alignItems: 'center',
                                             marginBottom: '0.5vmin'
                                         }}>
-                            <span style={{
-                                color: '#e53935',
-                                fontWeight: 'bold',
-                                fontSize: '1.4vmin'
-                            }}>
-                                ¥{product.current_price}
-                            </span>
+                                            <span style={{
+                                                color: '#e53935',
+                                                fontWeight: 'bold',
+                                                fontSize: '1.4vmin'
+                                            }}>
+                                                ¥{product.current_price}
+                                            </span>
                                             {product.original_price && product.original_price !== product.current_price && (
-                                                <span style={{
+                                                <span className={styles.noSelect}
+                                                style={{
                                                     color: '#999',
                                                     textDecoration: 'line-through',
                                                     marginLeft: '1vmin',
                                                     fontSize: '1.2vmin'
                                                 }}>
-                                    ¥{product.original_price}
-                                </span>
+                                                    ¥{product.original_price}
+                                                </span>
                                             )}
                                         </div>
 
                                         {/* 评分和销量 */}
-                                        <div style={{
+                                        <div className = {styles.noSelect}
+                                        style={{
                                             display: 'flex',
                                             justifyContent: 'space-between',
                                             fontSize: '1.2vmin',
@@ -797,7 +806,8 @@ export default function ExperimentPage() {
                                         </div>
 
                                         {/* 新增的商品特征 */}
-                                        <div style={{
+                                        <div className = {styles.noSelect}
+                                        style={{
                                             display: 'flex',
                                             flexWrap: 'wrap',
                                             gap: '0.5vmin',
@@ -811,14 +821,15 @@ export default function ExperimentPage() {
                                                     borderRadius: '0.3vmin',
                                                     fontSize: '1.0vmin'
                                                 }}>
-                                    {feature}
-                                </span>
+                                                    {feature}
+                                                </span>
                                             ))}
                                         </div>
 
                                         {/* 新增的真实评价 */}
                                         {product.real_review && (
-                                            <div style={{
+                                            <div className = {styles.noSelect}
+                                            style={{
                                                 fontSize: '1.0vmin',
                                                 color: '#909399',
                                                 fontStyle: 'italic',
@@ -831,7 +842,8 @@ export default function ExperimentPage() {
                                         )}
 
                                         {/* 新增的退换货和运输信息 */}
-                                        <div style={{
+                                        <div className = {styles.noSelect}
+                                        style={{
                                             fontSize: '1.0vmin',
                                             color: '#666',
                                             marginBottom: '0.5vmin'
