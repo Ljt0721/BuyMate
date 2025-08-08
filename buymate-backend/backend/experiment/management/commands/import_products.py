@@ -37,6 +37,10 @@ class Command(BaseCommand):
         else:
             self.stdout.write(self.style.SUCCESS("所有 90 条记录均完整。"))
 
+        ProductInfo.objects.all().delete()
+        self.stdout.write(self.style.SUCCESS("已清空 ProductInfo 表。"))
+
+
         imported = 0
         print(f"开始导入 {len(data)} 条商品记录...")
         for item in data:

@@ -62,6 +62,7 @@ export default function ExperimentPage() {
     const [videoPlaying, setVideoPlaying] = useState(false); // 新增状态：视频是否开始播放
     const [timestampedTexts, setTimestampedTexts] = useState<TimestampedText[]>([]);
     const [audioUrl, setAudioUrl] = useState<string | null>(null);
+    const [audioPlaying, setAudioPlaying] = useState(false);
     const videoRef = useRef<HTMLVideoElement>(null);
 
     /* ---------- 计时器 ---------- */
@@ -169,7 +170,7 @@ export default function ExperimentPage() {
             }
 
             const currentTime = (Date.now() - startTs) / 1000 + advance_time;
-            if ( !fast_forward ) {
+            if (!fast_forward) {
                 while (currentIndex < timestampedTexts.length - 1 && currentTime >= timestampedTexts[currentIndex + 1].start) {
                     currentIndex += 1;
                 }
@@ -310,6 +311,8 @@ export default function ExperimentPage() {
     };
 
     const getAudioFromText = async (text: string) => {
+        if (audioPlaying)
+            return;
         try {
             const encodedText = encodeURIComponent(text);
             const response = await fetch(
@@ -328,7 +331,7 @@ export default function ExperimentPage() {
         }
     };
     useEffect(() => {
-        if (aiResponse && group === 'D' && aiResponse.length > 1) {
+        if (aiResponse && group === 'D' && aiResponse.length > 1 && !audioPlaying) {
             getAudioFromText(aiResponse[1]);
         }
     }, [aiResponse]);
@@ -367,6 +370,7 @@ export default function ExperimentPage() {
     /* ---------- 渲染 ---------- */
     return (
         <div
+            className={styles.noSelect}
             style={{
                 width: '100vw',
                 height: '100vh',
@@ -657,6 +661,7 @@ export default function ExperimentPage() {
                                 src={audioUrl}
                                 autoPlay
                                 onPlay={() => {
+                                    setAudioPlaying(true);
                                     if (videoRef.current) {
                                         videoRef.current.volume = 0.2;
                                     }
@@ -665,6 +670,9 @@ export default function ExperimentPage() {
                                     if (videoRef.current) {
                                         videoRef.current.volume = 1.0;
                                     }
+                                    setTimeout(() => {
+                                        setAudioPlaying(false);
+                                    }, 2000);
                                 }}
                             />
                         )}
