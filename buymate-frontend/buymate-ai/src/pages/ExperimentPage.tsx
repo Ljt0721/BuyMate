@@ -8,6 +8,7 @@ const GROUP_DESC: Record<string, string> = {
     C: '文字干预组',
     D: '语音干预组',
 };
+const advance_time = 0.5; // 提前时间，单位秒
 
 interface Product {
     id: number;
@@ -158,6 +159,7 @@ export default function ExperimentPage() {
 
         let currentIndex = 0;
         let intervalId: NodeJS.Timeout;
+        let fast_forward = false;
 
         intervalId = setInterval(() => {
             if (!startTs || currentIndex >= timestampedTexts.length) {
@@ -166,7 +168,13 @@ export default function ExperimentPage() {
                 return;
             }
 
-            const currentTime = (Date.now() - startTs) / 1000 + 0.5;
+            const currentTime = (Date.now() - startTs) / 1000 + advance_time;
+            if ( !fast_forward ) {
+                while (currentIndex < timestampedTexts.length - 1 && currentTime >= timestampedTexts[currentIndex + 1].start) {
+                    currentIndex += 1;
+                }
+                fast_forward = true;
+            }
             const nextText = timestampedTexts[currentIndex];
 
             if (currentTime >= nextText.start) {
