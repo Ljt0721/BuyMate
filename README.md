@@ -41,3 +41,4 @@ npm run dev
 ## After Experiment
 
 实验完成后，分别在前端终端和后端终端中运行 Ctrl+C（Windows）或Command+C（MacOS）结束运行即可。
+结束运行后，找到 [数据库文件](buymate-backend/backend/db.sqlite3) 提交
