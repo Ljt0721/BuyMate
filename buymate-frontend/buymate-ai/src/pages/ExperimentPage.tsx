@@ -154,18 +154,28 @@ export default function ExperimentPage() {
     };
 
     useEffect(() => {
-        if (startTs && timestampedTexts.length > 0) {
-            const interval = setInterval(() => {
-                const currentTime = (Date.now() - startTs) / 1000; // 当前时间（秒）
-                const nextText = timestampedTexts.find((t) => t.start <= currentTime + 3.6 && t.start >= currentTime + 2.4);
+        if (!startTs || timestampedTexts.length === 0 || group === 'A' || group === 'B') return;
 
-                if (nextText) {
-                    getAiTranslation(nextText.text);
-                }
-            }, 1000); // 每秒检查一次
+        let currentIndex = 0;
+        let intervalId: NodeJS.Timeout;
 
-            return () => clearInterval(interval);
-        }
+        intervalId = setInterval(() => {
+            if (!startTs || currentIndex >= timestampedTexts.length) {
+                clearInterval(intervalId);
+                setAiResponse(null);
+                return;
+            }
+
+            const currentTime = (Date.now() - startTs) / 1000 + 0.5;
+            const nextText = timestampedTexts[currentIndex];
+
+            if (currentTime >= nextText.start) {
+                getAiTranslation(nextText.text);
+                currentIndex += 1; // 读取下一个
+            }
+        }, 100);
+
+        return () => clearInterval(intervalId);
     }, [startTs, timestampedTexts]);
 
     /* ---------- 资源加载完成检测 ---------- */
@@ -213,6 +223,7 @@ export default function ExperimentPage() {
             setStartTs(Date.now());
             setShowSimilarProducts(false);
             setVideoPlaying(true); // 设置视频开始播放
+            setAiResponse(null); // 清空AI响应
         }
     };
 
@@ -280,6 +291,7 @@ export default function ExperimentPage() {
 
         setTimeUsed(0);
         alert(`已记录${buy ? '购买' : '不购买'}选择，用时${(totalTime / 1000).toFixed(2)}秒`);
+        nav('/experiment');
     };
 
     const toggleSimilarProducts = () => {
@@ -308,7 +320,7 @@ export default function ExperimentPage() {
         }
     };
     useEffect(() => {
-        if (aiResponse) {
+        if (aiResponse && group === 'D' && aiResponse.length > 1) {
             getAudioFromText(aiResponse[1]);
         }
     }, [aiResponse]);
@@ -499,6 +511,7 @@ export default function ExperimentPage() {
                                 setTimeUsed(Date.now() - startTs);
                                 setStartTs(null);
                                 handleChoice(false);
+                                setAiResponse(null);
                             }
                         }}
                     />
@@ -607,7 +620,7 @@ export default function ExperimentPage() {
                                     color: '#FFF674'
                                 }}
                             >
-                                {displayedText || '聆听中...'}
+                                {startTs !== null && displayedText ? displayedText : '聆听中...'}
                             </div>
 
                         ) : null}
