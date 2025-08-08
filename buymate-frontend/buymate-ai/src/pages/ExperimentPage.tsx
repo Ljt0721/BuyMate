@@ -452,7 +452,7 @@ export default function ExperimentPage() {
                             borderRadius: '1vmin',
                         }}
                     >
-                        {Array.from({ length: 32 }, (_, i) => (
+                        {Array.from({ length: 30 }, (_, i) => (
                             <option key={i + 1} value={i + 1}>{i + 1}</option>
                         ))}
                     </select>
