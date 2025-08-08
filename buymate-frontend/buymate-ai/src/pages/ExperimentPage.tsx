@@ -8,7 +8,7 @@ const GROUP_DESC: Record<string, string> = {
     C: '文字干预组',
     D: '语音干预组',
 };
-const advance_time = 0.5; // 提前时间，单位秒
+const advance_time = 5; // 提前时间，单位秒
 
 interface Product {
     id: number;

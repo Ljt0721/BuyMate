@@ -9,6 +9,8 @@ import time
 import os
 import threading
 
+RESPONSE_DELAY = 5.5
+
 @csrf_exempt
 def get_products_by_experiment_id(request):
     experiment_id = request.GET.get('experiment_id')
@@ -110,19 +112,30 @@ def get_ai_translation(request):
     if request.method != 'GET':
         return JsonResponse({'success': False, 'error': 'Only GET allowed'}, status=405)
 
+    start_time = time.time()
+
     text = request.GET.get('text')
     if not text:
+        _ensure_min_delay(start_time)
         return JsonResponse({'success': False, 'error': 'Missing text parameter'}, status=400)
     
     tag, keyword = get_tag(text)
     if tag is None or keyword is None or tag == '' or keyword == '':
+        _ensure_min_delay(start_time)
         return JsonResponse({'success': True, 'tag': None, 'keyword': None, 'translation': None}, status=200)
     else:
         translation = get_translation(tag, keyword, text)
         if translation is None:
+            _ensure_min_delay(start_time)
             return JsonResponse({'success': False, 'error': 'Failed to get translation'}, status=500)
         else:
+            _ensure_min_delay(start_time)
             return JsonResponse({'success': True, 'tag': tag, 'keyword': keyword, 'translation': translation}, status=200)
+
+def _ensure_min_delay(start_time):
+    elapsed = time.time() - start_time
+    if elapsed < RESPONSE_DELAY:
+        time.sleep(RESPONSE_DELAY - elapsed)
 
 @csrf_exempt
 def get_audio(request):

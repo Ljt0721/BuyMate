@@ -1539,9 +1539,8 @@
       "7天无理由退货",
       "极速退款"
     ]
-  }
-],
-[
+  },
+
   {
     "id": " 15-1",
     "name": "MoveFree绿瓶氨糖软骨素MSM中老年养护关节120粒绿标【达人专享】",
@@ -2125,8 +2124,8 @@
     "price": {
       "current": 29.9,
       "original": 35.9,
-      "live_price": null,
-      "price_comparison": null
+      "live_price": 89.9,
+      "price_comparison": "一罐比直播间贵7元"
     },
     "sales_volume": "10万+",
     "rating": 4.7,
@@ -2154,8 +2153,8 @@
     "price": {
       "current": 33.9,
       "original": 45.9,
-      "live_price": null,
-      "price_comparison": null
+      "live_price": 89.9,
+      "price_comparison": "一罐比直播间便宜10元"
     },
     "sales_volume": "2万+",
     "rating": 4.7,
@@ -2183,8 +2182,8 @@
     "price": {
       "current": 69.7,
       "original": 99.0,
-      "live_price": null,
-      "price_comparison": null
+      "live_price": 89.9,
+      "price_comparison": "一罐比直播间便宜6元"
     },
     "sales_volume": "80万+",
     "reviews_count": "4千+",
