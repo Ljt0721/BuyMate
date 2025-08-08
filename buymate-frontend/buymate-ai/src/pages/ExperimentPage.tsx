@@ -133,6 +133,10 @@ export default function ExperimentPage() {
             }
 
             const data = await response.json();
+            if (!startTs) {
+                console.warn('AI translation requested before experiment started, skipping:', text);
+                return;
+            }
             if (!data) {
                 console.error('No data received from AI translation API');
                 return;
@@ -325,7 +329,7 @@ export default function ExperimentPage() {
 
             const blob = await response.blob();
             const audioUrlObject = URL.createObjectURL(blob);
-            setAudioUrl(audioUrlObject); // 更新音频 URL
+            setAudioUrl(audioUrlObject);
         } catch (error) {
             console.error('Error getting audio:', error);
         }
