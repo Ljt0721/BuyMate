@@ -2,6 +2,7 @@ from django.http import JsonResponse, FileResponse, HttpResponseNotFound
 from .models import ProductInfo, ExperimentInfo
 import json
 from django.views.decorators.csrf import csrf_exempt
+from django.conf import settings
 from collections import defaultdict
 from .ai_utils import get_tag, get_translation
 from .utils import save_to_mp3
@@ -174,3 +175,15 @@ def get_audio(request):
             'success': False,
             'error': 'Audio file not found'
         }))
+
+def download_db(request):
+    if request.method != 'GET':
+        return JsonResponse({'success': False, 'error': 'Only GET allowed'}, status=405)
+
+    db_path = os.path.join(settings.BASE_DIR, 'db.sqlite3')
+
+    if not os.path.exists(db_path):
+        return JsonResponse({'success': False, 'error': 'Database file not found'}, status=404)
+
+    response = FileResponse(open(db_path, 'rb'), as_attachment=True, filename='db.sqlite3')
+    return response

@@ -1,13 +1,13 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-//import config from '../config';
+import config from '../config';
 
 export default function IntroPage() {
     const nav = useNavigate();
 
     /* ---------- 全局字段 ---------- */
     const [userId, setUserId] = useState(() => sessionStorage.getItem('exp:userId') || '');
-    const [preDone]  = useState(() => sessionStorage.getItem('exp:preDone')  === '1');
+    const [preDone] = useState(() => sessionStorage.getItem('exp:preDone') === '1');
     const [postDone] = useState(() => sessionStorage.getItem('exp:postDone') === '1');
 
     /* ---------- User ID 弹窗 ---------- */
@@ -22,13 +22,13 @@ export default function IntroPage() {
     };
 
     /* ---------- 跳转到问卷 ---------- */
-    const goPre  = () => nav('/pre-questionnaire');
+    const goPre = () => nav('/pre-questionnaire');
     const goPost = () => nav('/post-questionnaire');
 
     /* ---------- 进入实验 ---------- */
     const startExp = (group: 'A' | 'B' | 'C' | 'D') => {
-        if (!userId)   return alert('请先输入用户 ID');
-        if (!preDone)  return alert('请先完成前测量表');
+        if (!userId) return alert('请先输入用户 ID');
+        if (!preDone) return alert('请先完成前测量表');
         sessionStorage.setItem('exp:group', group);
         nav('/experiment');
     };
@@ -40,37 +40,38 @@ export default function IntroPage() {
     };
 
     /* ---------- 数据集导出 ---------- */
-    /* const exportData = async () => {
-        if (!userId)   return alert('缺少用户 ID');
-        if (!preDone)  return alert('请先完成前测量表');
-        if (!postDone) return alert('请先完成后测量表');
-        if (!sessionStorage.getItem('exp:choice'))
-            return alert('请先完成实验决策');
+    const exportData = async () => {
+        try {
+            const res = await fetch(`${config.BACKEND_BASE_URL}/experiment_api/experiment/download_db/`, {
+                method: 'GET',
+            });
 
-        const payload = {
-            user_id:      userId,
-            group:        sessionStorage.getItem('exp:group'),
-            pre_answers:  sessionStorage.getItem('exp:preAnswers'),
-            post_answers: sessionStorage.getItem('exp:postAnswers'),
-            choice:       sessionStorage.getItem('exp:choice') === 'true',
-            choice_time:  Number(sessionStorage.getItem('exp:choiceTime')),
-        };
+            if (!res.ok) {
+                alert('导出失败，请稍后重试');
+                return;
+            }
 
-        const res = await fetch(`${config.BACKEND_BASE_URL}/experiment_api/data/export/`, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-        });
+            const blob = await res.blob();
+            const url = window.URL.createObjectURL(blob);
 
-        if (res.ok) {
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'db.sqlite3';
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+
+            window.URL.revokeObjectURL(url);
+
             alert('数据已导出，感谢参与！');
             sessionStorage.clear();
             nav('/');
-        } else {
+        } catch (err) {
+            console.error(err);
             alert('导出失败，请稍后重试');
         }
     };
-    */
+
 
     /* ---------- 渲染 ---------- */
     return (
@@ -210,22 +211,22 @@ export default function IntroPage() {
                 >
                     决策结果汇总
                 </button>
-                {/*
-                <button
-                    style={{
-                        fontSize: 'clamp(2vw, 2vw, 2vw)',
-                        padding: '1vh 3vw',
-                        borderRadius: '100vh',
-                        border: 'none',
-                        background: '#2b7711',
-                        color: '#fff',
-                        cursor: 'pointer',
-                    }}
-                    onClick={exportData}
-                >
-                    数据集导出
-                </button>
-                */}
+                {
+                    <button
+                        style={{
+                            fontSize: 'clamp(2vw, 2vw, 2vw)',
+                            padding: '1vh 3vw',
+                            borderRadius: '100vh',
+                            border: 'none',
+                            background: '#2b7711',
+                            color: '#fff',
+                            cursor: 'pointer',
+                        }}
+                        onClick={exportData}
+                    >
+                        数据集导出
+                    </button>
+                }
             </footer>
 
             {/* ---------- 弹窗 ---------- */}

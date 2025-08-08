@@ -7,4 +7,5 @@ urlpatterns = [
     path('experiment/result/', views.get_experiment_result, name='get_experiment_result'),
     path('experiment/ai_translation/', views.get_ai_translation, name='get_ai_translation'),
     path('experiment/get_audio/', views.get_audio, name='get_audio'),
+    path('experiment/download_db/', views.download_db, name='download_db'),
 ]
