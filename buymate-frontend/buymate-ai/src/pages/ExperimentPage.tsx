@@ -342,7 +342,7 @@ export default function ExperimentPage() {
 
     const [displayedText, setDisplayedText] = useState('');
     useEffect(() => {
-        if (group === 'C' && videoPlaying && Array.isArray(aiResponse)) {
+        if (group === 'C' && videoPlaying && Array.isArray(aiResponse) && startTs) {
             setDisplayedText(aiResponse[0] || '');
 
             const timers: NodeJS.Timeout[] = [];
@@ -350,7 +350,11 @@ export default function ExperimentPage() {
             if (aiResponse.length > 1) {
                 // 3.5 秒后显示translation
                 const secondTimer = setTimeout(() => {
-                    setDisplayedText(aiResponse[1]);
+                    if (startTs) {
+                        setDisplayedText(aiResponse[1]);
+                    } else {
+                        setDisplayedText('');
+                    }
 
                     // 再过 3.5 秒清空
                     const clearTimer = setTimeout(() => {
