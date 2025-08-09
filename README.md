@@ -42,3 +42,24 @@ npm run dev
 
 实验完成后，分别在前端终端和后端终端中运行 Ctrl+C（Windows）或Command+C（MacOS）结束运行即可。
 结束运行后，找到 [数据库文件](buymate-backend/backend/db.sqlite3) 提交
+
+## 再次运行
+
+重新启动后端需要的命令如下
+
+```bash
+cd buymate-backend
+
+source venv/bin/activate  # macOS/Linux
+venv\Scripts\activate.bat  # Windows
+
+cd backend
+python manage.py runserver
+```
+
+重新启动前端需要的命令如下
+
+```bash
+cd buymate-frontend/buymate-ai
+npm run dev
+```
