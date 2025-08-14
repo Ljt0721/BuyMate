@@ -6,7 +6,8 @@ Thumbs.db
 *.pyc
 *.mp4
 __pycache__/
-dbs
+*.sqlite3
+*.xlsx
 
 # === Python / Django ===
 buymate-backend/venv/
